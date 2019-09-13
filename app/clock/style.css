@@ -1,0 +1,151 @@
+﻿body {
+  background: #ccc;
+  color: #000;
+  font-family: YuGothic, "Yu Gothic", "ヒラギノ角ゴシック", "Hiragino Sans",
+    sans-serif;
+  margin: 0;
+}
+
+#screen {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 320px;
+  margin: 0 auto;
+}
+
+/* 時計の壁紙 */
+#clock-bg {
+  position: relative;
+  width: 320px;
+  height: 400px;
+  background-size: cover;
+}
+
+/* 文字盤 */
+#dial {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 320px;
+  height: 320px;
+  margin: auto;
+  background-image: url("dial.png");
+  filter: drop-shadow(0 0 2px #000);
+  -webkit-filter: drop-shadow(0 0 2px #000);
+  opacity: 0.6;
+}
+
+/* 水準器 */
+#level-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 90px;
+  height: 90px;
+  background-image: url("level.png");
+  filter: drop-shadow(0 0 2px #000);
+  -webkit-filter: drop-shadow(0 0 2px #000);
+  opacity: 0.5;
+}
+
+/* キャンバス: 日付、時刻表示、水準器の描画に使用 */
+#clockCanvas,
+#levelCanvas {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  opacity: 0.8;
+}
+
+/* アナログ時計の針 */
+#hands {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+#h-hand,
+#m-hand,
+#s-hand {
+  position: absolute;
+  left: 130px; /* 文字盤の中心.X - transformOrigin.X */
+  top: 180px; /* 文字盤の中心.Y - transformOrigin.Y */
+  transform-origin: 30px 50%;
+  -webkit-transform-origin: 30px 50%;
+  filter: drop-shadow(0 0 5px #000);
+  -webkit-filter: drop-shadow(0 0 5px #000);
+  opacity: 0.8;
+}
+#h-hand {
+  opacity: 0.7;
+}
+#pin {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+/* メニュー */
+ul#ui {
+  position: absolute;
+  right: 0;
+  bottom: 5px;
+  color: #fff;
+  opacity: 0.8;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  opacity: 0.8;
+}
+ul#ui li {
+  display: inline-block;
+  margin: 0 5px 0 0;
+}
+ul#ui li a {
+  display: block;
+  padding: 0 1em;
+  height: 32px;
+  line-height: 32px;
+  background: #00f;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  border: 1px solid #888;
+  border-radius: 5px;
+}
+
+/* 説明文 */
+#description {
+  width: 320px;
+  font-size: 12pt;
+}
+#description h1 {
+  font-size: 1.5em;
+}
+#description pre {
+  white-space: pre-wrap;
+}
+#description .attention {
+  font-size: 90%;
+  font-weight: bold;
+}
+
+/* フッター */
+footer {
+  background: #000;
+  color: #fff;
+  text-align: center;
+}

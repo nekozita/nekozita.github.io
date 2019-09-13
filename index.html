@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <title>猫舌カフェ</title>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1"
+    />
+    <link rel="stylesheet" href="common/style.css" />
+    <link rel="stylesheet" href="common/icomoon/style.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Coiny|Days+One|Gravitas+One");
+
+      /* グローバル設定 */
+      input[type="text"],
+      input[type="email"],
+      select,
+      option,
+      textarea {
+        font-size: 12pt;
+      }
+      form {
+        margin: 0 10px;
+      }
+      a {
+        text-decoration: none;
+        color: #08f;
+        font-weight: bold;
+        padding: 4px 8px;
+      }
+      a:hover {
+        color: #f88;
+      }
+
+      h1 {
+        position: relative;
+        padding: 2px 1.2em;
+        color: #fff;
+        font-size: 1.5em;
+        line-height: 1.3;
+        font-family: "Gravitas+One", sans-serif;
+        /*letter-spacing: 1px;*/
+        vertical-align: middle;
+        border-bottom: 2px solid #0abf97;
+        text-shadow: -1px -1px 4px #0abf97, 1px -1px 4px #0abf97,
+          1px 1px 4px #0abf97, -1px 1px 4px #0abf97;
+        /*1px 1px 3px rbba(0,0,0,.6);*/
+      }
+      h1:before {
+        position: absolute;
+        left: 0;
+        content: "■";
+      }
+      h1:after {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        font-size: 60%;
+        content: "/////";
+      }
+      h1 span {
+        margin: 0 5px;
+        color: #fff;
+        font-size: 60%;
+        /*letter-spacing: 1px;*/
+        text-transform: uppercase;
+        text-shadow: -1px -1px 4px #0abf97, 1px -1px 4px #0abf97,
+          1px 1px 4px #0abf97, -1px 1px 4px #0abf97;
+      }
+      h2 {
+        color: #0abf97;
+        font-size: 1.2em;
+        line-height: 1.2;
+        margin: 1em 0 0 0;
+      }
+      @media screen and (max-width: 479px) {
+        h1 {
+          text-align: center;
+        }
+        h1:before,
+        h1:after {
+          display: none;
+        }
+      }
+
+      body {
+        margin: 0;
+        font-family: 游ゴシック, "Yu Gothic", YuGothic, sans-serif;
+        background: #ecfae7;
+        color: #555;
+        -webkit-animation: fadeIn 1s;
+        animation: fadeIn 1s;
+      }
+      @-webkit-keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      #header {
+        box-sizing: border-box;
+        min-height: 65px;
+        padding: 5px;
+        background: #18ab00;
+        color: #fff;
+        font-size: 9pt;
+        font-family: "Days One", sans-serif;
+      }
+      .logo {
+        display: inline-block;
+        font-size: 10pt;
+        font-weight: bold;
+        text-align: center;
+        vertical-align: middle;
+      }
+      .logo a {
+        display: block;
+        padding: 10px 15px;
+        color: #fff;
+        text-decoration: none;
+      }
+      .logo a span {
+        display: block;
+        margin: 3px 0 0 0;
+        color: #00ffae;
+        font-size: 80%;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      .catchcopy {
+        font-size: 7pt;
+        font-weight: bold;
+      }
+      #footer {
+        position: relative;
+        margin-top: 40px;
+        padding: 1em 64px;
+        background: #18ab00;
+        color: #fff;
+        font-size: 8pt;
+        font-family: "Days One", sans-serif;
+        text-align: center;
+        letter-spacing: 1px;
+        /*角丸*/
+        /*border:1px solid #fff;*/
+        /*border-radius:8px;*/
+        /*box-shadow:5px 5px 5px rgba(0,0,0,.5);*/
+      }
+      #footer:after {
+        position: absolute;
+        content: "";
+        bottom: 0;
+        left: 5px;
+        right: 5px;
+        height: 64px;
+        background: url(common/cha01.png) no-repeat left bottom,
+          url(common/cha03.png) no-repeat right bottom;
+      }
+
+      /*
+		ナビメニュー
+		http://wwx.jp/css-navigation-menu
+	*/
+      #nav-bg {
+        display: none;
+      }
+      #nav-icon {
+        display: none;
+      }
+      #nav-cb {
+        display: none;
+      }
+      #nav {
+        position: static;
+        display: inline-block;
+        width: auto;
+        height: auto;
+        /*↑ここまでリセット処理*/
+        background: #18ab00;
+        font-size: 10pt;
+        vertical-align: middle;
+        /*z-index: 1000;*/
+      }
+      #nav ul {
+        list-style: none;
+        padding: 0;
+      }
+      /* ドロップダウンメニュー */
+      ul.drop-menu {
+        position: relative;
+        display: inline-block;
+        margin: 0 auto;
+        background: #18ab00;
+        /* インライン要素の隙間対策 */
+        letter-spacing: -0.4em;
+        z-index: 1000;
+      }
+      ul.drop-menu > li {
+        display: inline-block;
+        height: 70px;
+        margin: 0;
+        text-align: center;
+        vertical-align: top;
+        border-right: 2px solid #060;
+        letter-spacing: normal;
+      }
+      ul.drop-menu > li:first-child {
+        border-left: 2px solid #060;
+      }
+      ul.drop-menu li a {
+        display: block;
+        text-decoration: none;
+        padding: 0.5em 1em;
+        color: #fff;
+      }
+      ul.drop-menu li a:hover {
+        background: #7dbf00;
+        /*opacity: .5;*/
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+      }
+      #nav a span {
+        display: block;
+        margin: 3px 0 0 0;
+        color: #00ffae;
+        text-transform: uppercase;
+        font-size: 80%;
+        letter-spacing: 1px;
+      }
+      li.dropdown {
+        position: relative;
+      }
+      li.dropdown > ul {
+        position: absolute;
+        visibility: hidden;
+        width: 12em;
+        background: #18ab00;
+        opacity: 0;
+      }
+      li.dropdown:hover > ul {
+        visibility: visible;
+        opacity: 1;
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+      }
+      li.dropdown > ul > li > ul {
+        position: absolute;
+        box-sizing: border-box;
+        left: 100%;
+        top: 0;
+        width: 100%;
+      }
+      li.dropdown > a:after {
+        content: "▼";
+        margin-left: 5px;
+      }
+      li.dropdown > ul > li.dropdown > a:after {
+        content: ">>";
+      }
+      @media screen and (max-width: 479px) {
+        /*
+			ドロワーメニュー
+		*/
+        #nav {
+          position: fixed;
+          box-sizing: border-box;
+          width: 100%;
+          height: 100%;
+          top: 0;
+          right: -100%;
+          background: rgba(128, 200, 0, 0.8);
+          -webkit-transition: -webkit-transform 0.3s linear 0s;
+          transition: transform 0.3s linear 0s;
+          /*padding: 0 0;*/
+          z-index: 1000;
+        }
+        #nav-bg {
+          position: fixed;
+          display: block;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+          right: 0;
+          top: 0;
+          background: #000;
+          -webkit-transition: all 0.3s linear 0s;
+          transition: all 0.3s linear 0s;
+          z-index: -1;
+        }
+        #nav-icon {
+          position: fixed;
+          /*position: absolute;*/
+          display: block;
+          cursor: pointer;
+          width: 65px;
+          height: 65px;
+          line-height: 60px;
+          right: 0;
+          top: 0;
+          background: #0c0;
+          color: #fff;
+          font-size: 60px;
+          text-align: center;
+          -webkit-transition: all 0.3s linear 0s;
+          transition: all 0.3s linear 0s;
+          z-index: 1001;
+        }
+        #nav-cb {
+          display: none;
+        }
+        #nav-cb:checked ~ #nav
+		/*,#nav-cb:checked ~ #nav-icon*/ {
+          -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+        }
+        #nav-cb:checked ~ #nav-bg {
+          opacity: 0.6;
+          z-index: 999;
+        }
+        #nav ul {
+          position: relative;
+          display: block;
+          box-sizing: border-box;
+          width: 100%;
+          margin: 0;
+          background: transparent;
+        }
+        #nav li {
+          display: block;
+          float: none;
+          margin: 1em 0;
+          text-align: center;
+          border: none;
+        }
+        #nav li:first-child {
+          border-left: none;
+        }
+        #nav a {
+          display: block;
+          text-decoration: none;
+          padding: 1em 2em;
+          color: #fff;
+          -webkit-transition: 0.4s;
+          transition: 0.4s;
+        }
+        li.dropdown > ul {
+          visibility: visible;
+          opacity: 1;
+          font-size: 80%;
+        }
+      }
+
+      .content {
+        margin: 2em 15px 0 15px;
+      }
+
+      /* スライダー */
+      .slider-wrap {
+        position: relative;
+        width: 100%;
+      }
+      .slider {
+        overflow: hidden;
+        width: 100%;
+      }
+      .slider > div,
+      .slider > ul {
+        position: relative;
+      }
+      .slider > ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .slider > div > div,
+      .slider li {
+        float: left;
+        /*height: 200px;*/ /* 本番では削除 */
+      }
+      .slider a {
+        position: relative;
+        display: block;
+        width: 100%;
+        /*height: 100%;*/
+        margin: 0;
+        padding: 0;
+        color: #e00;
+        text-decoration: none;
+        box-sizing: border-box;
+        /*border: 1px solid #e00;*/ /* デバッグ用 */
+      }
+      .slider li a {
+        float: left;
+        width: 48%;
+      }
+      .list-slider li a {
+        margin: 0 0 0 2%;
+        overflow: hidden;
+        border-radius: 5px;
+      }
+      .slider img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+      .slider a span {
+        position: absolute;
+        display: block;
+        bottom: 0;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 5px;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        text-align: center;
+      }
+      .slider-prev,
+      .slider-next {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto 0;
+        width: 40px;
+        height: 40px;
+        background: url(common/slider-arrow.png);
+        background-repeat: no-repeat;
+        -webkit-filter: drop-shadow(0 0 2px rgb(0, 0, 0));
+        filter: drop-shadow(0 0 2px rgb(0, 0, 0));
+        opacity: 0.6;
+      }
+      .slider-prev {
+        left: 5px;
+      }
+      .slider-next {
+        right: 5px;
+        background-position: -40px 0;
+      }
+      .slider-prev:hover {
+        background-position: 0 -40px;
+        opacity: 0.8;
+      }
+      .slider-next:hover {
+        background-position: -40px -40px;
+        opacity: 0.8;
+      }
+
+      .pan a {
+        overflow: hidden;
+      }
+      .pan a img {
+        -webkit-transition: -webkit-transform 0.5s ease;
+        transition: transform 0.5s ease;
+      }
+      .pan a img:hover {
+        cursor: pointer;
+        /*マウスオーバーで画像を拡大表示*/
+        -webkit-transform: scale(1.2);
+        transform: scale(1.2);
+      }
+
+      ul.gamelist {
+        list-style: none;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      ul.gamelist li {
+        margin: 5px 0;
+        background: #444;
+        color: #fff;
+        border-radius: 5px;
+      }
+      ul.gamelist a {
+        display: block;
+        padding: 5px;
+        color: #e00;
+        letter-spacing: -0.5em;
+      }
+      ul.gamelist a:hover {
+        background: #fff;
+        opacity: 0.8;
+        transition: 0.8s;
+      }
+      ul.gamelist a > div {
+        display: inline-block;
+        vertical-align: top;
+      }
+      ul.gamelist .capture {
+        width: 20%;
+        height: 60px; /* 本番ではautoに設定 */
+        background: #888;
+      }
+      ul.gamelist img {
+        width: 100%;
+        height: auto;
+      }
+      ul.gamelist .descript {
+        width: 80%;
+        box-sizing: border-box;
+        padding: 5px 15px;
+        letter-spacing: normal;
+      }
+      ul.gamelist span {
+        display: block;
+      }
+      ul.gamelist .title {
+        font-size: 12pt;
+      }
+      ul.gamelist .tags {
+        font-size: 9pt;
+      }
+
+      /* ソーシャル */
+      #header > a {
+        display: inline-block;
+        padding: 0 15px;
+        vertical-align: middle;
+        font-size: 20pt;
+        color: #fff;
+      }
+      #social {
+        text-align: center;
+        /*margin: 15px 0;*/
+      }
+      #social .icon-twitter {
+        font-size: 25pt;
+      }
+      #header a,
+      #social a {
+        text-decoration: none;
+      }
+      #social a {
+        color: #4fc3f7;
+      }
+      #social a:hover {
+        color: #08f;
+      }
+
+      /* リンク */
+      #link ul,
+      #material ul {
+        /*list-style: none;*/
+        margin: 0;
+        padding: 0;
+      }
+      #link li,
+      #material li {
+        display: inline-block;
+        margin: 0 1em;
+      }
+    </style>
+    <script src="common/easing.js"></script>
+    <!-- <script src="common/legacy.js"></script> -->
+    <script src="common/ticker.js"></script>
+    <script src="common/slider.js"></script>
+  </head>
+  <body>
+    <div id="header">
+      <div class="logo">
+        <a href="#">
+          <strong>NEKOZITA CAFE</strong>
+          <span>心に残る味を。</span>
+        </a>
+      </div>
+      <input id="nav-cb" type="checkbox" value="off" />
+      <label id="nav-icon" for="nav-cb">≡</label>
+      <label id="nav-bg" for="nav-cb"></label>
+      <div id="nav">
+        <ul class="drop-menu">
+          <li>
+            <a href="#game">
+              <strong>ゲーム</strong>
+              <span>Game</span>
+            </a>
+          </li>
+          <li>
+				<a href="#webapp">
+				  <strong>アプリ</strong>
+				  <span>Appli</span>
+				</a>
+			  </li>
+			  <li>
+            <a href="#about">
+              <strong>概要</strong>
+              <span>About</span>
+            </a>
+          </li>
+          <li class="dropdown">
+            <a href="#other">
+              <strong>その他</strong>
+              <span>Other</span>
+            </a>
+            <ul>
+              <li><a href="#material">使用素材</a></li>
+              <li><a href="#contact">お問い合わせ</a></li>
+              <li><a href="#link">リンク</a></li>
+              <!-- 						<li class="dropdown">
+							<a href="#">リンク</a>
+							<ul>
+								<li><a href="#">外部リンク</a></li>
+							</ul>
+						</li>
+ -->
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <a href="https://twitter.com/nekomeishi"
+        ><span class="icon-twitter"></span
+      ></a>
+    </div>
+
+    <!-- 電光掲示板 -->
+    <!-- 	<div class="marquee">
+		<div>
+			<span>HTML5ゲーム鋭意製作中！</span>
+			<span>新作ゲーム配信中！</span>
+		</div>
+	</div>
+ -->
+    <!-- ニュースティッカー -->
+    <div class="ticker" rel="roll">
+      <ul>
+        <li>
+          <a href="app/clock/index.html">「水準器付き時計」Webアプリ配信しました！</a>
+        </li>
+        <li>
+          <a href="https://plicy.net/User/39576">PLiCyにてゲーム投稿開始！</a>
+        </li>
+        <li>
+          <a href="https://plicy.net/GamePlay/65927"
+            >PLiCy作品「ゴールは目の前なのに…」を投稿しました！</a
+          >
+        </li>
+        <li>
+          <a href="https://plicy.net/GamePlay/65977"
+            >PLiCy作品「プリシーズリレー」を投稿しました！</a
+          >
+        </li>
+        <li>
+          <a href="https://plicy.net/GamePlay/67287"
+            >PLiCy作品「ウィッチ・メイズ」を投稿しました！</a
+          >
+        </li>
+        <!-- <li><a href="#">...</a></li> -->
+      </ul>
+    </div>
+
+    <div class="slider-wrap">
+      <div class="slider pan">
+        <div>
+          <div>
+            <a href="https://plicy.net/User/39576">
+              <img src="plicy-game.png" alt="" />
+              <span></span>
+            </a>
+          </div>
+          <!--
+				<div><a href="#">
+					<img src="slider-sample.png" alt="">
+					<span>slide2</span>
+				</a></div>
+ -->
+        </div>
+      </div>
+      <div class="slider-prev"></div>
+      <div class="slider-next"></div>
+    </div>
+
+    <div id="game">
+      <div class="content">
+        <h1>Game<span>ゲーム</span></h1>
+        <!-- 
+			<h2>新着ゲーム</h2>
+
+			<h2>ゲームリスト</h2>
+			<ul class="gamelist">
+				<li><a href="#">
+					<div class="capture">
+						<img src="" alt="">
+					</div>
+					<div class="descript">
+						<span class="title">Game1</span>
+						<span class="tags">ジャンル</span>
+					</div>
+				</a></li>
+				<li><a href="#">
+					<div class="capture">
+						<img src="" alt="">
+					</div>
+					<div class="descript">
+						<span class="title">Game2</span>
+						<span class="tags">ジャンル</span>
+					</div>
+				</a></li>
+				<li><a href="#">
+					<div class="capture">
+						<img src="" alt="">
+					</div>
+					<div class="descript">
+						<span class="title">Game3</span>
+						<span class="tags">ジャンル</span>
+					</div>
+				</a></li>
+			</ul>
+ -->
+        <a href="https://plicy.net/User/39576">現在PLiCyにてゲーム投稿中</a>
+
+        <h2>過去のFlashゲーム</h2>
+        <p>
+          <a href="pc/flash/mekupita/index.html">めくぴた</a>
+        </p>
+      </div>
+    </div>
+
+    <div id="webapp">
+      <div class="content">
+		  <h1>Web Appli<span>Webアプリ</span></h1>
+		  <a href="app/clock/index.html">水準器付き時計</a>
+	  </div>
+    </div>
+
+    <div id="about">
+      <div class="content">
+        <h1>About<span>サイト概要</span></h1>
+        <h2>猫舌カフェってどんなサイト？</h2>
+        <p>ほんわか美少女テイストな自作ゲームを公開しているサイトです。</p>
+        <h2>どんな人におすすめ？</h2>
+        <p>美少女ゲームが好きな方。</p>
+        <h2>サイト名に込められた思いや由来は？</h2>
+        <p>
+          もともとiアプリ向けのゲームを作り始めたのがきっかけで、初めての方でも”カフェ”で気軽に遊べるくらい分かりやすくという思いを込めて。”猫舌”は猫耳キャラが好きなのとインパクトが欲しくてつけました。
+        </p>
+        <h2>あなたのモットーは？</h2>
+        <p>“可愛いけど格好いい！”ゲームを目指して作っています。</p>
+        <h2>そんなサイトを作ってる人</h2>
+        <p>制作者：ねこめいし<br>
+          猫耳とメイドさんと珈琲が大好きなプログラマーです。</p>
+        <a href="credit.html">クレジット</a>
+      </div>
+    </div>
+
+    <div id="material">
+      <div class="content">
+        <h1>Material<span>使用素材</span></h1>
+        <ul>
+          <li><a href="https://fonts.google.com/">Google Fonts</a></li>
+          <li><a href="https://icomoon.io/">IcoMoon</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- お問い合わせ -->
+    <div id="contact">
+      <div class="content">
+        <h1>Contact<span>お問い合わせ</span></h1>
+        下記フォームに必要事項をご入力し、送信ボタンを押してください。
+        <form action="mail.php" method="post">
+          <div>お名前：<input type="text" name="name" required /></div>
+          <div>
+            メールアドレス：<input type="email" name="email" required />
+          </div>
+
+          <div>
+            件名：
+            <select name="subject" id="">
+              <option value="おたより">おたより</option>
+              <option value="不具合について">不具合について</option>
+              <option value="ご要望">ご要望</option>
+              <option value="お仕事の依頼">お仕事の依頼</option>
+              <option value="その他">その他</option>
+            </select>
+          </div>
+          <div>
+            お問い合わせ内容：
+            <textarea
+              name="comment"
+              id=""
+              cols="30"
+              rows="10"
+              required
+            ></textarea>
+          </div>
+          <input type="submit" name="action" />
+          <input type="reset" />
+          <!-- <button type="submit" name="action" value="post">送　信</button> -->
+          <!-- <button type="reset">リセット</button> -->
+        </form>
+      </div>
+    </div>
+
+    <!-- リンク -->
+    <div id="link">
+      <div class="content">
+        <h1>Link<span>リンク</span></h1>
+        <h2>お世話になったサイト様</h2>
+        <ul>
+          <li>
+            <a href="http://www.butterfly-corp.jp/">株式会社バタフライ</a>
+          </li>
+          <li>萌え☆スナック</li>
+          <!-- http://moesna.jp/ -->
+        </ul>
+        <h2>ソーシャルリンク</h2>
+        <div id="social">
+          <a href="https://twitter.com/nekomeishi"
+            ><span class="icon-twitter"></span
+          ></a>
+        </div>
+      </div>
+    </div>
+
+    <div id="footer">
+      <span>NEKOZITA CAFE.</span>
+      <span>SINCE:2003.12.23</span>
+    </div>
+
+    <script>
+      // ページ内リンクを押したときもドロワーメニューを閉じる
+      var navLink = document.querySelectorAll("#nav a");
+      Array.prototype.forEach.call(navLink, function(item) {
+        item.addEventListener("click", function() {
+          document.querySelector("#nav-cb").checked = false;
+        });
+      });
+
+      onload = function() {
+        NewsTicker();
+        Slider(".slider");
+      };
+    </script>
+  </body>
+</html>

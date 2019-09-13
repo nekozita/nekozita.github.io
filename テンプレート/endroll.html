@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+	<meta charset="UTF-8">
+	<title>映画みたいなエンドロール</title>
+	<meta name="viewport" content="width=device-width">
+	<style>
+	/*エンドロール*/
+	@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
+	body{
+		background: #222;
+		overflow: hidden;
+	}
+	.endroll{
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		width: 400px;
+		margin-left: -200px;
+		color: #fff;
+		font-family: 'Open Sans Condensed', sans-serif;
+		text-align: center;
+		text-transform: uppercase;
+		animation: 60s credits linear infinite;
+	}
+	.product{
+		font-size: 25pt;
+		margin-bottom: 25pt;
+	}
+	.job{
+		font-size: 12pt;
+		margin-bottom: 1em;
+	}
+	.name{
+		font-size: 25pt;
+		margin-bottom: 1em;
+	}
+	@keyframes credits{
+		0%{
+			top: 100%;
+		}100%{
+			top: -500%;
+		}
+	}
+	</style>
+</head>
+<body>
+	<div class="endroll">
+		<div class="product">猫舌物語</div>
+		<div class="job">directed by</div>
+		<div class="name">nekomeishi</div>
+		<div class="job">produced by</div>
+		<div class="name">catfood</div>
+		<div class="job">illust</div>
+		<div class="name">catfood</div>
+		<div class="job">program</div>
+		<div class="name">nekomeishi</div>
+	</div>
+</body>
+</html>

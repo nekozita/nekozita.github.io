@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+	<meta charset="UTF-8">
+	<title>Game List</title>
+	<meta name="viewport" content="width=device-width">
+	<style>
+	body{
+		font-family: sans-serif;
+	}
+	ul.gamelist{
+		list-style: none;
+		width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+	ul.gamelist li{
+		margin: 5px 0;
+		background: #444;
+		color: #fff;
+		border-radius: 5px;
+	}
+	ul.gamelist a{
+		display: block;
+		padding: 5px;
+		color: #e00;
+		letter-spacing: -.5em;
+	}
+	ul.gamelist a:hover{
+		background: #fff;
+		opacity: .8;
+		transition: .8s;
+	}
+	ul.gamelist a>div{
+		display: inline-block;
+		vertical-align: top;
+	}
+	ul.gamelist .capture{
+		width: 20%;
+		height: 80px; /* 本番ではautoに設定 */
+		background: #888;
+	}
+	ul.gamelist img{
+		width: 100%;
+		height: auto;
+	}
+	ul.gamelist .descript{
+		width: 80%;
+		box-sizing: border-box;
+		padding: 5px 15px;
+		letter-spacing: normal;
+	}
+	ul.gamelist span{
+		display: block;
+	}
+	ul.gamelist .title{
+		font-size: 12pt;
+	}
+	ul.gamelist .tags{
+		font-size: 9pt;
+	}
+	</style>
+</head>
+<body>
+
+	<h1>開発中ゲーム</h1>
+	<ul class="gamelist">
+		<li><a href="game/solve15v3/index.html">
+			<div class="capture">
+				<img src="" alt="">
+			</div>
+			<div class="descript">
+				<span class="title">solve15 ver.3</span>
+				<span class="tags">パズル</span>
+			</div>
+		</a></li>
+
+<!-- 		<li><a href="#">
+			<div class="capture">
+				<img src="" alt="">
+			</div>
+			<div class="descript">
+				<span class="title">Game2</span>
+				<span class="tags">ジャンル</span>
+			</div>
+		</a></li>
+ -->
+	</ul>
+
+	<h1>ツール</h1>
+	<ul class="gamelist">
+		<li><a href="game/_d/index.html">
+			<div class="capture">
+				<img src="" alt="">
+			</div>
+			<div class="descript">
+				<span class="title">debug</span>
+				<span class="tags">ツール</span>
+			</div>
+		</a></li>
+
+<!-- 		<li><a href="#">
+			<div class="capture">
+				<img src="" alt="">
+			</div>
+			<div class="descript">
+				<span class="title">Game2</span>
+				<span class="tags">ジャンル</span>
+			</div>
+		</a></li>
+ -->
+	</ul>
+
+</body>
+</html>

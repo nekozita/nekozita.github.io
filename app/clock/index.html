@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="jp">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>水準器付き時計アプリ</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="legacy.js"></script>
+    <script src="clock.js"></script>
+    <script src="level.js"></script>
+  </head>
+  <body>
+    <div id="screen">
+      <div id="clock-bg">
+        <div id="dial"></div>
+        <!-- 時刻表示に使用 -->
+        <canvas id="clockCanvas"></canvas>
+
+        <!-- アナログ時計の文字盤と針 -->
+        <div id="hands">
+          <!-- 長針・短針・秒針 -->
+          <img id="h-hand" src="h-hand.png" alt="" />
+          <img id="m-hand" src="m-hand.png" alt="" />
+          <img id="s-hand" src="s-hand.png" alt="" />
+          <img id="pin" src="pin.png" alt="" />
+        </div>
+
+        <!-- 水準器 -->
+        <div id="level-bg"></div>
+        <canvas id="levelCanvas"></canvas>
+
+        <!-- UI -->
+        <ul id="ui">
+          <!-- 壁紙切り替えボタン -->
+          <li>
+            <a id="btn-wp" href="#" onclick="clock.nextWallpaper()">壁紙</a>
+          </li>
+          <!-- 針の動き -->
+          <li>
+            <a id="btn-smooth" href="#" onclick="clock.smooth()">スムーズ</a>
+          </li>
+          <!-- 水準器の表示・非表示 -->
+          <li>
+            <a id="btn-level" href="#" onclick="clock.level.show()"
+              >水準器あり</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- 説明文 -->
+      <div id="description">
+        <h1>水準器を使用する際の設定</h1>
+        <p>
+          水準器を使用する際は、端末から画面ロックの設定をしてお使いください。<br />
+          【iOSの場合】<br />
+          「コントロールセンター」から「鍵アイコン」を選択することで設定できます。<br />
+        </p>
+        <p class="attention">
+          ※お使いの機種によっては、水準器カーソルが逆方向に動く事があるかもしれません。
+        </p>
+      </div>
+    </div>
+
+    <footer>
+      水準器付き時計 Version 1.0
+    </footer>
+
+    <script>
+      var clock;
+
+      onload = function() {
+        clock = new Clock();
+        clock.setWallpapers(wallpaper);
+        clock.start();
+      };
+    </script>
+  </body>
+</html>

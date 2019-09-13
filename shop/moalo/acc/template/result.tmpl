@@ -1,0 +1,486 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Language" content="ja" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<meta http-equiv="Content-Script-Type" content="text/javascript" />
+<title>%COPYRIGHT1%</title>
+<script type="text/javascript" src="%IMAGE_URL%/dom.js"></script>
+<script type="text/javascript" src="%IMAGE_URL%/modechange.js"></script>
+<script type="text/javascript" src="%IMAGE_URL%/accsubmit.js"></script>
+<script type="text/javascript" src="%IMAGE_URL%/inputlimit.js"></script>
+<link href="%IMAGE_URL%/default.css" type="text/css" rel="stylesheet" />
+<link href="%IMAGE_URL%/table.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<TMPL_IF NAME="AUTHFLAG"><div class="right">［<a href="%CGI_URL%?action=logoff">ログオフ</a>］</div></TMPL_IF>
+<h1>%COPYRIGHT2%</h1>
+<h2>概要</h2>
+<table class="tbl">
+	<tr>
+		<th>インプレッション数</th>
+		<td>%loglines%</td>
+	</tr>
+	<tr>
+		<th>ログファイル</th>
+		<td>
+			<form action="%CGI_URL%" method="post">
+				<select name="LOG">
+					<TMPL_LOOP NAME="LOG_LIST"><option value="%logfilename%" %selected%>%logfilename%</option></TMPL_LOOP>
+				</select>
+				<input type="submit" value="ログ切替" name="cbtn" id="cbtn" />
+			</form>
+		</td>
+	</tr>
+	<tr>
+		<th>ログファイルサイズ</th>
+		<td>%log_size% バイト</td>
+	</tr>
+	<tr>
+		<th>ログローテーション</th>
+		<td>
+			<TMPL_IF NAME="LOTATION_0">ローテーションしない</TMPL_IF>
+			<TMPL_IF NAME="LOTATION_2">日ごとにローテーション</TMPL_IF>
+			<TMPL_IF NAME="LOTATION_3">月ごとにローテーション</TMPL_IF>
+			<TMPL_IF NAME="LOTATION_1">
+				<div>%lotation_size% バイトでローテーション（使用率 %LogSizeRate%%）</div>
+			</TMPL_IF>
+		</td>
+	</tr>
+	<tr>
+		<th>解析モード</th>
+		<td>
+			<TMPL_IF NAME="ANA_MODE_DAILY">日指定 %ana_mode_year%年 %ana_mode_mon%月 %ana_mode_day%日</TMPL_IF>
+			<TMPL_IF NAME="ANA_MODE_MONTHLY">月指定 %ana_mode_year%年 %ana_mode_mon%月</TMPL_IF>
+			<TMPL_IF NAME="ANA_MODE_ALL">全指定</TMPL_IF>
+		</td>
+	</tr>
+	<tr>
+		<th>解析モード指定</th>
+		<td>
+			<form action="%CGI_URL%" method="post">
+				<input type="hidden" name="LOG" value="%SelectedLogFileName%" />
+				<select name="MODE" id="MODE">
+					<option value="" %mode_selected_all%>全指定</option>
+					<option value="MONTHLY" %mode_selected_monthly%>月指定</option>
+					<option value="DAILY" %mode_selected_daily%>日指定</option>
+				</select>
+				<select name="MONTH" id="MONTH">
+					<TMPL_LOOP NAME="YEAR_MON_LIST"><option value="%y%%m%" %selected%>%y%年 %m%月</option></TMPL_LOOP>
+				</select>
+				<input type="text" name="DAY" id="DAY" value="%ana_day%" size="2" class="inputlimit_num" />日
+				<input type="submit" name="abtn" id="abtn" value="解析開始" />
+			</form>
+		</td>
+	</tr>
+	<tr>
+		<th>解析対象期間</th>
+		<td>%min_year%/%min_mon%/%min_mday% %min_hour%:%min_min%:%min_sec% ～ %max_year%/%max_mon%/%max_mday% %max_hour%:%max_min%:%max_sec%</td>
+	</tr>
+</table>
+<hr />
+<div class="menu">
+	<TMPL_IF NAME="ANA_REMOTETLD"><a href="#COUNTRY">国別ドメイン名レポート</a> |</TMPL_IF>
+	<TMPL_IF NAME="ANA_REMOTEDOMAIN"><a href="#DOMAIN">アクセス元ドメイン名レポート</a> |</TMPL_IF>
+	<TMPL_IF NAME="ANA_REMOTEHOST"><a href="#HOSTNAME">アクセス元ホスト名レポート</a> |</TMPL_IF>
+	<TMPL_IF NAME="ANA_HTTPLANG"><a href="#LANGUAGE">ブラウザー表示可能言語レポート</a> |</TMPL_IF>
+	<TMPL_IF NAME="ANA_BROWSER"><a href="#BROWSER">ブラウザーレポート</a> |</TMPL_IF>
+	<TMPL_IF NAME="ANA_PLATFORM"><a href="#PLATFORM">プラットフォームレポート</a> |</TMPL_IF>
+	<TMPL_IF NAME="ANA_REQUESTMONTHLY"><a href="#MONTHLY">月別アクセス数レポート</a> |</TMPL_IF>
+	<TMPL_IF NAME="ANA_REQUESTDAILY"><a href="#DAILY">日付別アクセス数レポート</a> |</TMPL_IF>
+	<TMPL_IF NAME="ANA_REQUESTHOURLY"><a href="#HOURLY">時間別アクセス数レポート</a> |</TMPL_IF>
+	<TMPL_IF NAME="ANA_REQUESTWEEKLY"><a href="#WEEKLY">曜日別アクセス数レポート</a> |</TMPL_IF>
+	<TMPL_IF NAME="ANA_REQUESTFILE"><a href="#REQUEST">リクエストレポート</a> |</TMPL_IF>
+	<TMPL_IF NAME="ANA_REFERERSITE"><a href="#LINK_SITE">リンク元サイトレポート</a> |</TMPL_IF>
+	<TMPL_IF NAME="ANA_REFERERURL"><a href="#LINK_URL">リンク元URLレポート</a> |</TMPL_IF>
+	<TMPL_IF NAME="ANA_KEYWORD"><a href="#SEARCH_KEY">検索キーワードレポート</a> |</TMPL_IF>
+	<TMPL_IF NAME="ANA_RESOLUTION"><a href="#RESOLUTION">画面解像度レポート</a> |</TMPL_IF>
+	<TMPL_IF NAME="ANA_COLORDEPTH"><a href="#COLORDEPTH">画面色深度レポート</a> |</TMPL_IF>
+</div>
+<hr />
+<!-- 国別ドメイン名レポート start -->
+<TMPL_IF NAME="ANA_REMOTETLD">
+<a name="COUNTRY" id="COUNTRY"></a>
+<h2>国別ドメイン名レポート</h2>
+<table class="tbl">
+	<tr>
+		<th>順位</th>
+		<th>TLD</th>
+		<th>国名</th>
+		<th>インプレッション数</th>
+		<th>グラフ</th>
+	</tr>
+	<TMPL_LOOP NAME="ANA_REMOTETLD_LIST">
+	<tr>
+		<td class="center">%order%</td>
+		<td>%tld%</td>
+		<td>%country%</td>
+		<td class="right">%num%</td>
+		<td><TMPL_IF NAME="num"><img src="%IMAGE_URL%/graphbar.gif" width="%GraphLength%" height="10" alt="%num%" class="gbar1" /></TMPL_IF> (%rate%%)</td>
+	</tr>
+	</TMPL_LOOP>
+</table>
+</TMPL_IF>
+<!-- 国別ドメイン名レポート end -->
+
+<!-- アクセス元ドメイン名レポート start -->
+<TMPL_IF NAME="ANA_REMOTEDOMAIN">
+<a name="DOMAIN" id="DOMAIN"></a>
+<h2>アクセス元ドメイン名レポート</h2>
+<table class="tbl">
+	<tr>
+		<th>順位</th>
+		<th>ドメイン名</th>
+		<th>インプレッション数</th>
+		<th>グラフ</th>
+	</tr>
+	<TMPL_LOOP NAME="ANA_REMOTEDOMAIN_LIST">
+	<tr>
+		<td class="center">%order%</td>
+		<td>%domain%</td>
+		<td class="right">%num%</td>
+		<td><TMPL_IF NAME="num"><img src="%IMAGE_URL%/graphbar.gif" width="%GraphLength%" height="10" alt="%num%" class="gbar1" /></TMPL_IF> (%rate%%)</td>
+	</tr>
+	</TMPL_LOOP>
+</table>
+</TMPL_IF>
+<!-- アクセス元ドメイン名レポート end -->
+
+<!-- アクセス元ホスト名レポート start -->
+<TMPL_IF NAME="ANA_REMOTEHOST">
+<a name="HOSTNAME" id="HOSTNAME"></a>
+<h2>アクセス元ホスト名レポート</h2>
+<table class="tbl">
+	<tr>
+		<th>順位</th>
+		<th>ホスト名</th>
+		<th>インプレッション数</th>
+		<th>グラフ</th>
+	</tr>
+	<TMPL_LOOP NAME="ANA_REMOTEHOST_LIST">
+	<tr>
+		<td class="center">%order%</td>
+		<td>%host%</td>
+		<td class="right">%num%</td>
+		<td><TMPL_IF NAME="num"><img src="%IMAGE_URL%/graphbar.gif" width="%GraphLength%" height="10" alt="%num%" class="gbar1" /></TMPL_IF> (%rate%%)</td>
+	</tr>
+	</TMPL_LOOP>
+</table>
+</TMPL_IF>
+<!-- アクセス元ホスト名レポート end -->
+
+<!-- ブラウザー表示可能言語レポート start -->
+<TMPL_IF NAME="ANA_HTTPLANG">
+<a name="LANGUAGE" id="LANGUAGE"></a>
+<h2>ブラウザー表示可能言語レポート</h2>
+<table class="tbl">
+	<tr>
+		<th>順位</th>
+		<th>言語</th>
+		<th>インプレッション数</th>
+		<th>グラフ</th>
+	</tr>
+	<TMPL_LOOP NAME="ANA_HTTPLANG_LIST">
+	<tr>
+		<td class="center">%order%</td>
+		<td><TMPL_IF NAME="lang">%lang_caption% (%lang%)<TMPL_ELSE>不明</TMPL_IF></td>
+		<td class="right">%num%</td>
+		<td><TMPL_IF NAME="num"><img src="%IMAGE_URL%/graphbar.gif" width="%GraphLength%" height="10" alt="%num%" class="gbar1" /></TMPL_IF> (%rate%%)</td>
+	</tr>
+	</TMPL_LOOP>
+</table>
+</TMPL_IF>
+<!-- ブラウザー表示可能言語レポート end -->
+
+<!-- ブラウザーレポート start -->
+<TMPL_IF NAME="ANA_BROWSER">
+<a name="BROWSER" id="BROWSER"></a>
+<h2>ブラウザーレポート</h2>
+<table class="tbl3">
+	<tr>
+		<th>順位</th>
+		<th>ブラウザー</th>
+		<th>インプレッション数</th>
+		<th>グラフ</th>
+	</tr>
+	<TMPL_LOOP NAME="ANA_BROWSER_LIST">
+	<tr>
+		<td class="row1 center">%order%</td>
+		<td class="row1"><TMPL_IF NAME="browser">%browser%<TMPL_ELSE>不明</TMPL_IF></td>
+		<td class="row1 right">%num%</td>
+		<td class="row1"><TMPL_IF NAME="num"><img src="%IMAGE_URL%/graphbar.gif" width="%GraphLength%" height="10" alt="%num%" class="gbar1" /></TMPL_IF> (%rate%%)</td>
+	</tr>
+	<TMPL_LOOP NAME="VERSION_LIST">
+	<tr>
+		<td class="row2"></td>
+		<td class="row2"><TMPL_IF NAME="version">%version%<TMPL_ELSE>不明</TMPL_IF></td>
+		<td class="row2 right">%num%</td>
+		<td class="row2"><TMPL_IF NAME="num"><img src="%IMAGE_URL%/graphbar2.gif" width="%GraphLength%" height="8" alt="%num%" class="gbar2" /></TMPL_IF> (%rate%%)</td>
+	</tr>
+	</TMPL_LOOP>
+	</TMPL_LOOP>
+</table>
+</TMPL_IF>
+<!-- ブラウザーレポート end -->
+
+<!-- プラットフォームレポート start -->
+<TMPL_IF NAME="ANA_PLATFORM">
+<a name="PLATFORM" id="PLATFORM"></a>
+<h2>プラットフォームレポート</h2>
+<table class="tbl3">
+	<tr>
+		<th>順位</th>
+		<th>OS</th>
+		<th>インプレッション数</th>
+		<th>グラフ</th>
+	</tr>
+	<TMPL_LOOP NAME="ANA_PLATFORM_LIST">
+	<tr>
+		<td class="row1 center">%order%</td>
+		<td class="row1"><TMPL_IF NAME="platform">%platform%<TMPL_ELSE>不明</TMPL_IF></td>
+		<td class="row1 right">%num%</td>
+		<td class="row1"><TMPL_IF NAME="num"><img src="%IMAGE_URL%/graphbar.gif" width="%GraphLength%" height="10" alt="%num%" class="gbar1" /></TMPL_IF> (%rate%%)</td>
+	</tr>
+	<TMPL_LOOP NAME="VERSION_LIST">
+	<tr>
+		<td class="row2"></td>
+		<td class="row2"><TMPL_IF NAME="version">%version%<TMPL_ELSE>不明</TMPL_IF></td>
+		<td class="row2 right">%num%</td>
+		<td class="row2"><TMPL_IF NAME="num"><img src="%IMAGE_URL%/graphbar2.gif" width="%GraphLength%" height="8" alt="%num%" class="gbar2" /></TMPL_IF> (%rate%%)</td>
+	</tr>
+	</TMPL_LOOP>
+	</TMPL_LOOP>
+</table>
+</TMPL_IF>
+<!-- プラットフォームレポート end -->
+
+<!-- 月別アクセス数レポート start -->
+<TMPL_IF NAME="ANA_REQUESTMONTHLY">
+<a name="MONTHLY" id="MONTHLY"></a>
+<h2>月別アクセス数レポート</h2>
+<table class="tbl">
+	<tr>
+		<th>月</th>
+		<th>インプレッション数</th>
+		<th>グラフ</th>
+	</tr>
+	<TMPL_LOOP NAME="ANA_REQUESTMONTHLY_LIST">
+	<tr>
+		<td>%year%年 %month%月</td>
+		<td class="right">%num%</td>
+		<td><TMPL_IF NAME="num"><img src="%IMAGE_URL%/graphbar.gif" width="%GraphLength%" height="10" alt="%num%" class="gbar1" /></TMPL_IF> (%rate%%)</td>
+	</tr>
+	</TMPL_LOOP>
+</table>
+</TMPL_IF>
+<!-- 月別アクセス数レポート end -->
+
+<!-- 日付別アクセス数レポート start -->
+<TMPL_IF NAME="ANA_REQUESTDAILY">
+<a name="DAILY" id="DAILY"></a>
+<h2>日付別アクセス数レポート</h2>
+<table class="tbl">
+	<tr>
+		<th>日付</th>
+		<th>インプレッション数</th>
+		<th>グラフ</th>
+	</tr>
+	<TMPL_LOOP NAME="ANA_REQUESTDAILY_LIST">
+	<tr>
+		<td>%year%年 %month%月 %day%日 （<span class="week%w%">%week%</span>）</td>
+		<td class="right">%num%</td>
+		<td><TMPL_IF NAME="num"><img src="%IMAGE_URL%/graphbar.gif" width="%GraphLength%" height="10" alt="%num%" class="gbar1" /></TMPL_IF> (%rate%%)</td>
+	</tr>
+	</TMPL_LOOP>
+</table>
+</TMPL_IF>
+<!-- 日付別アクセス数レポート end -->
+
+<!-- 時間別アクセス数レポート start -->
+<TMPL_IF NAME="ANA_REQUESTHOURLY">
+<a name="HOURLY" id="HOURLY"></a>
+<h2>時間別アクセス数レポート</h2>
+<table class="tbl">
+	<tr>
+		<th>時間</th>
+		<th>インプレッション数</th>
+		<th>グラフ</th>
+	</tr>
+	<TMPL_LOOP NAME="ANA_REQUESTHOURLY_LIST">
+	<tr>
+		<td>%hour% 時</td>
+		<td class="right">%num%</td>
+		<td><TMPL_IF NAME="num"><img src="%IMAGE_URL%/graphbar.gif" width="%GraphLength%" height="10" alt="%num%" class="gbar1" /></TMPL_IF> (%rate%%)</td>
+	</tr>
+	</TMPL_LOOP>
+</table>
+</TMPL_IF>
+<!-- 時間別アクセス数レポート end -->
+
+<!-- 曜日別アクセス数レポート start -->
+<TMPL_IF NAME="ANA_REQUESTWEEKLY">
+<a name="WEEKLY" id="WEEKLY"></a>
+<h2>曜日別アクセス数レポート</h2>
+<table class="tbl">
+	<tr>
+		<th>曜日</th>
+		<th>インプレッション数</th>
+		<th>グラフ</th>
+	</tr>
+	<TMPL_LOOP NAME="ANA_REQUESTWEEKLY_LIST">
+	<tr>
+		<td><span class="week%w%">%week%曜日</span></td>
+		<td class="right">%num%</td>
+		<td><TMPL_IF NAME="num"><img src="%IMAGE_URL%/graphbar.gif" width="%GraphLength%" height="10" alt="%num%" class="gbar1" /></TMPL_IF> (%rate%%)</td>
+	</tr>
+	</TMPL_LOOP>
+</table>
+</TMPL_IF>
+<!-- 曜日別アクセス数レポート end -->
+
+<!-- リクエストレポート start -->
+<TMPL_IF NAME="ANA_REQUESTFILE">
+<a name="REQUEST" id="REQUEST"></a>
+<h2>リクエストレポート</h2>
+<table class="tbl">
+	<tr>
+		<th>順位</th>
+		<th>ページ</th>
+		<th>インプレッション数</th>
+		<th>グラフ</th>
+	</tr>
+	<TMPL_LOOP NAME="ANA_REQUESTFILE_LIST">
+	<tr>
+		<td class="center">%order%</td>
+		<td>
+			<TMPL_IF NAME="title">%title%<br /></TMPL_IF>
+			<a href="%CGI_URL%?redirect=%url_encoded%" target="_blank">%url_disp%</a>
+		</td>
+		<td class="right">%num%</td>
+		<td><TMPL_IF NAME="num"><img src="%IMAGE_URL%/graphbar.gif" width="%GraphLength%" height="10" alt="%num%" class="gbar1" /></TMPL_IF> (%rate%%)</td>
+	</tr>
+	</TMPL_LOOP>
+</table>
+</TMPL_IF>
+<!-- リクエストレポート end -->
+
+<!-- リンク元サイトレポート start -->
+<TMPL_IF NAME="ANA_REFERERSITE">
+<a name="LINK_SITE" id="LINK_SITE"></a>
+<h2>リンク元サイトレポート</h2>
+<table class="tbl">
+	<tr>
+		<th>順位</th>
+		<th>サイト</th>
+		<th>インプレッション数</th>
+		<th>グラフ</th>
+	</tr>
+	<TMPL_LOOP NAME="ANA_REFERERSITE_LIST">
+	<tr>
+		<td class="center">%order%</td>
+		<td><a href="%CGI_URL%?redirect=%url_encoded%" target="_blank">%url_disp%</a></td>
+		<td class="right">%num%</td>
+		<td><TMPL_IF NAME="num"><img src="%IMAGE_URL%/graphbar.gif" width="%GraphLength%" height="10" alt="%num%" class="gbar1" /></TMPL_IF> (%rate%%)</td>
+	</tr>
+	</TMPL_LOOP>
+</table>
+</TMPL_IF>
+<!-- リンク元サイトレポート end -->
+
+<!-- リンク元URLレポート start -->
+<TMPL_IF NAME="ANA_REFERERURL">
+<a name="LINK_URL" id="LINK_URL"></a>
+<h2>リンク元URLレポート</h2>
+<table class="tbl">
+	<tr>
+		<th>順位</th>
+		<th>URL</th>
+		<th>インプレッション数</th>
+		<th>グラフ</th>
+	</tr>
+	<TMPL_LOOP NAME="ANA_REFERERURL_LIST">
+	<tr>
+		<td class="center">%order%</td>
+		<td><a href="%CGI_URL%?redirect=%url_encoded%" target="_blank">%url_disp%</a></td>
+		<td class="right">%num%</td>
+		<td><TMPL_IF NAME="num"><img src="%IMAGE_URL%/graphbar.gif" width="%GraphLength%" height="10" alt="%num%" class="gbar1" /></TMPL_IF> (%rate%%)</td>
+	</tr>
+	</TMPL_LOOP>
+</table>
+</TMPL_IF>
+<!-- リンク元URLレポート end -->
+
+<!-- 検索エンジンの検索キーワード レポート start -->
+<TMPL_IF NAME="ANA_KEYWORD">
+<a name="SEARCH_KEY" id="SEARCH_KEY"></a>
+<h2>検索エンジンの検索キーワード レポート</h2>
+<table class="tbl">
+	<tr>
+		<th>順位</th>
+		<th>キーワード</th>
+		<th>インプレッション数</th>
+		<th>グラフ</th>
+	</tr>
+	<TMPL_LOOP NAME="ANA_KEYWORD_LIST">
+	<tr>
+		<td class="center">%order%</td>
+		<td>%keyword%</td>
+		<td class="right">%num%</td>
+		<td><TMPL_IF NAME="num"><img src="%IMAGE_URL%/graphbar.gif" width="%GraphLength%" height="10" alt="%num%" class="gbar1" /></TMPL_IF> (%rate%%)</td>
+	</tr>
+	</TMPL_LOOP>
+</table>
+</TMPL_IF>
+<!-- 検索エンジンの検索キーワード レポート end -->
+
+<!-- 画面解像度レポート start -->
+<TMPL_IF NAME="ANA_RESOLUTION">
+<a name="RESOLUTION" id="RESOLUTION"></a>
+<h2>画面解像度レポート</h2>
+<table class="tbl">
+	<tr>
+		<th>順位</th>
+		<th>解像度</th>
+		<th>インプレッション数</th>
+		<th>グラフ</th>
+	</tr>
+	<TMPL_LOOP NAME="ANA_RESOLUTION_LIST">
+	<tr>
+		<td class="center">%order%</td>
+		<td>%resolution%</td>
+		<td class="right">%num%</td>
+		<td><TMPL_IF NAME="num"><img src="%IMAGE_URL%/graphbar.gif" width="%GraphLength%" height="10" alt="%num%" class="gbar1" /></TMPL_IF> (%rate%%)</td>
+	</tr>
+	</TMPL_LOOP>
+</table>
+</TMPL_IF>
+<!-- 画面解像度レポート end -->
+
+<!-- 画面色深度レポート start -->
+<TMPL_IF NAME="ANA_COLORDEPTH">
+<a name="COLORDEPTH" id="COLORDEPTH"></a>
+<h2>画面色深度レポート</h2>
+<table class="tbl">
+	<tr>
+		<th>順位</th>
+		<th>色深度</th>
+		<th>インプレッション数</th>
+		<th>グラフ</th>
+	</tr>
+	<TMPL_LOOP NAME="ANA_COLORDEPTH_LIST">
+	<tr>
+		<td class="center">%order%</td>
+		<td>%color% 色 （%bit% bit）</td>
+		<td class="right">%num%</td>
+		<td><TMPL_IF NAME="num"><img src="%IMAGE_URL%/graphbar.gif" width="%GraphLength%" height="10" alt="%num%" class="gbar1" /></TMPL_IF> (%rate%%)</td>
+	</tr>
+	</TMPL_LOOP>
+</table>
+</TMPL_IF>
+<!-- 画面色深度レポート end -->
+
+<hr />
+<div>%COPYRIGHT3%</div>
+</body>
+</html>

@@ -1,0 +1,219 @@
+/* 「めくぴた」スタイルシート */
+
+
+/* ■■■ 基本設定 ■■■ */
+
+/* 全要素の設定 */
+* {
+	font-family:        "ＭＳ Ｐゴシック",Osaka;
+	font-size:          12px;
+	line-height:        120%;
+	margin:             0px;
+	padding:            0px;
+	text-align:         left;
+}
+
+/* BODYの設定 */
+body {
+	background-color:   #333333;
+	color:              #666666;
+	text-align:         center;
+}
+
+/* リンクの設定 */
+a {
+	color:              #6666FF;
+}
+/* マウスを乗せたときの設定 */
+a:hover {
+	color:              #FF66FF;
+	text-decoration:    none;
+}
+
+/* リストの設定 */
+ol,ul {
+	margin:             0px;
+	padding:            5px 0px 5px 3em;
+}
+
+
+/* ■■■ ＩＤ属性の定義 ■■■ */
+
+/* キャンバスの設定 */
+#canvas {
+	border:             1px #666666 solid;
+	width:              700px;
+}
+
+
+/* ■■■ クラス属性の定義 ■■■ */
+
+/* 作品タイトルの設定 */
+.work_title {
+	color:              #CC9966;
+	font-weight:        bold;
+}
+
+/* 垂直ラインの余白設定 */
+td.vr {
+	vertical-align:     middle;
+}
+
+
+
+
+/* ■■■ 互換性を持たせるための設定 ■■■ */
+
+/* ■■■ Align ■■■ */
+
+.tl { text-align: left;   }
+.tc { text-align: center; }
+.tr { text-align: right;  }
+
+
+/* ■■■ Colors ■■■■■■■■■■■■■■■ */
+
+.bg_pink    { background-color:#FFCCCC; }
+.bg_orange  { background-color:#FF9900; color:#FFFFFF; }
+.bg_brown   { background-color:#CC9966; color:#FFFFFF; }
+.bg_purple  { background-color:#CC99FF; color:#FFFFFF; }
+.bg_violet  { background-color:#9999FF; color:#FFFFFF; }
+
+.bg_red     { background-color:#FF0000; color:#FFFFFF; }
+.bg_yellow  { background-color:#FFFF00; color:#FFFFFF; }
+.bg_green   { background-color:#00FF00; color:#FFFFFF; }
+.bg_blue    { background-color:#0000FF; color:#FFFFFF; }
+
+.bg_white   { background-color:#FFFFFF; }
+.bg_black   { background-color:#000000; color:#FFFFFF; }
+.bg_gray    { background-color:#999999; color:#FFFFFF; }
+
+.bg_rpink   { background-color:#FFE6FF; }
+.bg_rpurple { background-color:#EFE0FF; }
+.bg_rblue   { background-color:#E6E6FF; }
+.bg_rgray   { background-color:#CCCCCC; }
+.bg_rgreen  { background-color:#E3F1CD; }
+
+.c_orange   { color:#AA4400; }
+.c_brown    { color:#CC9966; }
+.c_red      { color:#FF0000; }
+.c_white    { color:#FFFFFF; }
+.c_gray     { color:#666666; }
+
+.b_pink     { border-color:#FF99CC; }
+.b_brown    { border-color:#CC9966; }
+.b_violet   { border-color:#9999FF; }
+.b_gray     { border-color:#666666; }
+
+
+/* ■■■ Box  ■■■■■■■■■■■■■■■■ */
+
+.flatbox {
+	background-color:   #FFFF99;
+	border-style:       solid;
+	border-width:       2px 10px 2px 10px;
+	font-weight:        bold;
+	margin:             0px;
+	padding:            2px;
+}
+
+.box01 {
+	background-color:   #FFFFFF;
+	border-width:       2px;
+	border-style:       solid;
+	margin:             0px;
+	padding:            2px;
+}
+
+
+/* ■■■ Frame  ■■■■■■■■■■■■■■■ */
+
+.frame {
+	border-style: solid;
+	border-width: 1px;
+}
+
+
+/* ■■■ Image  ■■■■■■■■■■■■■■■ */
+
+img {
+	border-style:       none;
+	vertical-align:     bottom;
+}
+
+img.block {
+	display: block;
+}
+
+
+/* ■■■ Table  ■■■■■■■■■■■■■■■ */
+
+table {
+	background-color:   #FFFFFF;
+	margin:             0px auto 0px auto;
+}
+
+td {
+	text-align:         left;
+	vertical-align:     top;
+}
+
+table.link_list {
+	border-left-style:   none;
+	border-right-style:  none;
+	border-top-color:    #FFCCCC;
+	border-top-style:    solid;
+	border-top-width:    4px;
+	border-bottom-color: #FFCCCC;
+	border-bottom-style: solid;
+	border-bottom-width: 4px;
+}
+table.link_list th {
+	border-left-style:   none;
+	border-right-style:  none;
+	border-top-color:    #FFCCCC;
+	border-top-style:    solid;
+	border-top-width:    1px;
+	border-bottom-color: #FFCCCC;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+table.link_list td {
+	border-left-style:   none;
+	border-right-style:  none;
+	border-top-color:    #FFCCCC;
+	border-top-style:    solid;
+	border-top-width:    1px;
+	border-bottom-color: #FFCCCC;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+}
+table.link_list div {
+	padding:            5px 10px;
+}
+
+
+/* ■■■ Heading  ■■■■■■■■■■■■■■ */
+
+h1,h2,h3 {
+	color:              #FFFFFF;
+	margin:             0px;
+	padding:            2px 5px 1px 5px;
+}
+
+h1 { font-size:16px; }
+h2 { font-size:14px; }
+h3 { font-size:12px; }
+
+
+/* ■■■ Horizontal Rule  ■■■■■■■■■■ */
+
+div.sep1 {
+	border-style:       solid;
+	border-width:       1px 0px 0px 0px;
+}
+
+div.sep2 {
+	border-style:       dashed;
+	border-width:       1px 0px 0px 0px;
+}

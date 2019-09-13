@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+	<meta charset="UTF-8">
+	<title>credit</title>
+	<meta name="viewport" content="width=device-width">
+	<style>
+	/*エンドロール*/
+	@import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
+	body{
+		background: #222;
+		overflow: hidden;
+	}
+	.endroll{
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		width: 400px;
+		margin-left: -200px;
+		color: #fff;
+		font-family: 'Open Sans Condensed', sans-serif;
+		text-align: center;
+		text-transform: uppercase;
+		animation: 90s credits linear infinite;
+	}
+	.product{
+		font-size: 25pt;
+		margin-bottom: 25pt;
+	}
+	.job{
+		font-size: 12pt;
+		margin-bottom: 1em;
+	}
+	.name{
+		font-size: 25pt;
+		margin-bottom: 1em;
+	}
+	@keyframes credits{
+		0%{
+			top: 100%;
+		}100%{
+			top: -500%;
+		}
+	}
+	</style>
+</head>
+<body>
+	<div class="endroll">
+		<div class="product">nekozita cafe</div>
+		<div class="job">created by</div>
+		<div class="name">nekomeishi</div>
+		<div class="job">recommended browser</div>
+		<div class="name">chrome</div>
+		<div class="job">recommended system</div>
+		<div class="name">pc,iphone,ipod touch</div>
+		<div class="job">since</div>
+		<div class="name">2003.12.23</div>
+<!-- 		<div class="job">special thanks</div>
+		<div class="name"></div>
+ -->
+	</div>
+</body>
+</html>

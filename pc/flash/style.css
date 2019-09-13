@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+
+/* メインコンテンツ カスタマイズ
+--------------------------------------*/
+
+.main p {
+	margin:0 0 1em 0;
+}
+.main dt {
+	float:left;
+}
+.main dd {
+	background:#F4F4F4;
+	margin:1em 0 1em 165px;
+}
+.main dd:after {
+	content:'';
+	display:block;
+	clear:both;
+}

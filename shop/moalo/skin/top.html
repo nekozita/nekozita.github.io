@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta name="Author" content="ねこめいし">
+<meta name="keywords" content="通販,アニメ,グッズ">
+<meta name="description" content="アニメ関連の通販サイトです。">
+<link rel="stylesheet" href="skin/css/base.css" type="text/css">
+<link rel="stylesheet" href="skin/css/visual1.css" type="text/css">
+<script type="text/javascript" src="skin/js/draw.js"></script>
+<style type="text/css">
+	ul { list-style-image: url('skin/img/ul1.png'); }
+</style>
+<title>MOALO&nbsp;-&nbsp;アニメ通販サイト</title>
+</head>
+
+<body onload="preloadImages('skin/img/c01h.png','skin/img/c02h.png','skin/img/c03h.png','skin/img/c04h.png','skin/img/c05h.png','skin/img/c06h.png')">
+
+
+<table id="container" width="940" cellspacing="0" border="0">
+
+<!-- ヘッダ開始 -->
+<tr>
+<td id="header" width="930">
+
+	<table width="100%" cellspacing="0" border="0">
+	<tr>
+		<td width="200" height="70"><img src="skin/img/logo.png" width="200" height="70" alt="MOALO"></td>
+		<!-- スポンサー -->
+		<td width="730" align="center">
+			${HTML_ADS1}
+		</td>
+	</tr>
+	</table>
+
+	<table width="100%" cellspacing="0" border="0">
+	<tr>
+		<td><div>バージョン切り替え：<a href="../moalo2/">MOALO 2</a></div></td>
+	</tr>
+	<tr>
+		<td>商品をカートに入れ、まとめてAmazonで購入！</td>
+		<td><div align="right"><a href="?m=cart">カートを見る</a>｜<a href="?m=help&amp;f=hlp_first">購入手順</a></div></td>
+	</tr>
+	</table>
+
+</td>
+</tr>
+<tr>
+<td id="index" width="940">
+
+	<!-- コンテンツメニュー -->
+	<table width="940" cellspacing="0" border="0">
+	<tr>
+		<td width="70"><a href="http://nekozita.com/shop/moalo/"><img id="c0" src="skin/img/c01.png" width="70" height="25" onmouseover="setSRC('c0','skin/img/c01h.png')" onmouseout="setSRC('c0','skin/img/c01.png')" alt="ホーム"></a></td>
+		<td width="40"><a href="?m=contents&amp;i=Books"><img id="c1" src="skin/img/c02.png" width="40" height="25" onmouseover="setSRC('c1','skin/img/c02h.png')" onmouseout="setSRC('c1','skin/img/c02.png')" alt="本"></a></td>
+		<td width="50"><a href="?m=contents&amp;i=DVD"><img id="c2" src="skin/img/c03.png" width="50" height="25" onmouseover="setSRC('c2','skin/img/c03h.png')" onmouseout="setSRC('c2','skin/img/c03.png')" alt="DVD"></a></td>
+		<td width="90"><a href="?m=contents&amp;i=Music"><img id="c3" src="skin/img/c04.png" width="90" height="25" onmouseover="setSRC('c3','skin/img/c04h.png')" onmouseout="setSRC('c3','skin/img/c04.png')" alt="ミュージック"></a></td>
+		<td width="65"><a href="?m=contents&amp;i=VideoGames"><img id="c4" src="skin/img/c05.png" width="65" height="25" onmouseover="setSRC('c4','skin/img/c05h.png')" onmouseout="setSRC('c4','skin/img/c05.png')" alt="ゲーム"></a></td>
+		<td width="125"><a href="?m=contents&amp;i=Toys"><img id="c5" src="skin/img/c06.png" width="125" height="25" onmouseover="setSRC('c5','skin/img/c06h.png')" onmouseout="setSRC('c5','skin/img/c06.png')" alt="おもちゃ＆ホビー"></a></td>
+<!-- 
+		<td width="100"><img id="c6" src="skin/img/c07.png" width="100" height="25" onmouseover="setSRC('c6','skin/img/c07h.png')" onmouseout="setSRC('c6','skin/img/c07.png')" alt="業界ニュース"></td>
+ -->
+		<td width="500"><img src="skin/img/c_sp.png" width="500" height="25" alt=""></td>
+	</tr>
+	</table>
+
+</td>
+</tr>
+
+<!-- 検索バー -->
+<tr>
+<td id="explorer" width="940">
+
+	<form id="search" action="./" method="post">
+		<input type="hidden" name="m" value="search">
+		<select name="i">
+${HTML_SELECT}
+		</select>
+		<input style="width:500px;" type="text" name="w" value="${VAL_KEYWORDS}"><input type="submit" value="検索">
+	</form>
+
+</td>
+</tr>
+
+<!-- コンテンツ開始 -->
+<tr>
+<td width="940">
+	<table cellspacing="0" border="0">
+	<tr>
+	<td id="explorer" width="170" valign="top">
+${HTML_EXPLORER}
+	</td>
+	<td id="contents" width="590" valign="top">
+${HTML_CONTENTS}
+		<br>
+		<br>
+		<br>
+		<br>
+
+		<!-- :::::::::: 解析 ここから :::::::::: -->
+
+		<div>
+			<script type="text/javascript">
+			<!--
+			document.write("<img src='acc/acclog.cgi?");
+			document.write("referrer="+document.referrer+"&");
+			document.write("width="+screen.width+"&");
+			document.write("height="+screen.height+"&");
+			document.write("color="+screen.colorDepth+"' />");
+			// -->
+			</script>
+		</div>
+
+		<!-- :::::::::: 解析 ここまで :::::::::: -->
+
+${HTML_ADS2}
+	</td>
+	<td id="attention" width="160" valign="top">
+${HTML_TOPSELLER}
+	</td>
+	</tr>
+	</table>
+
+</td>
+</tr>
+
+<!-- フッタ開始 -->
+<tr>
+<td id="footer" width="940">
+
+	<hr>
+	<table width="920" cellspacing="0" border="0">
+	<tr>
+		<td width="200">
+			<img src="skin/img/ban.png" width="200" height="40" alt="MOALO">
+		</td>
+		<td width="540">
+			Amazonサイト:&nbsp;
+			<a href="http://www.amazon.co.jp/exec/obidos/tg/browse/-/642970/ref=ed_cp_2_7_hp/" target="_blank">支払方法</a>｜<a href="http://www.amazon.co.jp/exec/obidos/tg/browse/-/642982/ref=ed_cp_2_8_hp/" target="_blank">配送量と配送情報</a>｜<a href="http://www.amazon.co.jp/exec/obidos/tg/browse/-/872444/ref=ed_cp_2_9_hp/" target="_blank">注文内容の確認・変更</a>｜<a href="http://www.amazon.co.jp/exec/obidos/tg/browse/-/643010/ref=ed_cp_2_10_hp/" target="_blank">注文のキャンセル</a><br>
+			<br>
+			<a href="mailto:info@nekozita.com?subject=【MOALO】○○の件">お問い合わせ</a><br>
+			&copy; 2006 MOALO. Product Advertising API by Amazon.
+		</td>
+		<td width="200">
+			姉妹サイト<br>
+			<a href="http://nekozita.com/" target="_blank"><img src="../../pc/ban.png" width="200" height="40" alt="猫舌カフェ"></a>
+		</td>
+	</tr>
+	</table>
+
+</td>
+</tr>
+</table>
+
+
+</body>
+</html>

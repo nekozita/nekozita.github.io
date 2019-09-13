@@ -1,0 +1,43 @@
+@charset "UTF-8";
+/* ■■■ 基本設定 ■■■■■■■■■■■■■■ */
+
+body,div,p,form,fieldset,
+h1,h2,h3,h4,h5,h6,
+dl,dt,dd,ul,ol,li,
+table,tr,th,td,address {
+	margin:            0px;
+	padding:           0px;
+}
+
+a {
+	text-decoration:   none;
+}
+
+a:hover {
+	text-decoration:   underline;
+}
+
+body {
+	background-color:  #DDDDDD;
+	color:             #444444;
+	font-family:       Verdana,Arial,sans-serif;
+	font-size:         12px;
+}
+
+h1,h2,h3 {
+	margin:            0px;
+	padding:           2px 0px;
+}
+
+h1 { font-size:30px; line-height: 1em; }
+h2 { font-size:14px; line-height: 1em; }
+h3 { font-size:12px; line-height: 1em; }
+
+img {
+	border-style:      none;
+}
+
+input {
+	font-family:       "ＭＳ ゴシック",Osaka;;
+	font-size:         12px;
+}

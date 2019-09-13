@@ -1,0 +1,319 @@
+@charset "UTF-8";
+/* ============== VISUAL SETTING ============== */
+/*
+
+   CSS Design : Nekomeishi
+
+*/
+
+
+/* ::: Global ::::::::::::::::::::::::::::::::: */
+
+a {
+	color:             #6600FF;
+}
+
+a:hover {
+	color:             #CC6600;
+}
+
+h1 {
+	color:             #56D868;
+}
+
+h2,h3 {
+	color:             #B25E36;
+}
+
+ol,ul {
+	margin:            0px;
+	padding:           0px 0px 0px 3em;
+}
+
+
+/* ::: Block Setting :::::::::::::::::::::::::: */
+
+div.err {
+	background-color:  #FFCCCC;
+	font-size:         14px;
+	font-weight:       bold;
+	padding:           5px;
+}
+
+div.exp_gp_index {
+	background-color:  #E6EEF3;
+	font-weight:       bold;
+	padding:           5px;
+	width:             160px;
+}
+
+div.exp_gp_index ul {
+	padding:           0px 0px 0px 25px;
+}
+
+div.exp_kw_offer {
+	font-size:         10px;
+	text-align:        center;
+}
+
+div.infomation {
+	background-color:  #EEEEEE;
+	padding:           5px;
+}
+
+div.warning {
+	background-color:  #FFCCCC;
+	padding:           5px;
+}
+
+
+/* ::: Class ;;;;:::::::::::::::::::::::::::::: */
+/*
+.hline1 {
+	background-color:  #00BF1A;
+	color:             #FFFFFF;
+	font-weight:       bold;
+	margin:            0px;
+	padding:           2px 5px;
+}
+*/
+.box1 {
+	border:            #00BF1A solid 1px;
+	padding:           5px;
+}
+
+
+/* ::: Contents Setting ;;;;::::::::::::::::::: */
+
+div.con_h2 {
+	background-color:  #00BF1A;
+	color:             #FFFFFF;
+	font-weight:       bold;
+	margin:            0px 0px 5px 0px;
+	padding:           1px 5px;
+}
+
+span.con_special {
+	color:             #F662BA;
+	font-weight:       bold;
+}
+
+table.pickup {
+	border-style:      none;
+}
+
+table.pickup th {
+	background-color:  #B5F2BE;
+}
+
+table.pickup td {
+	background-color:  #FFFFFF;
+}
+
+
+/* ::: Horizon Rule ::::::::::::::::::::::::::: */
+
+img.hr {
+	margin:            8px 0px;
+}
+
+
+/* ::: Page Index ::::::::::::::::::::::::::::: */
+
+.page_index {
+	font-weight:       bold;
+	margin:            0px auto;
+}
+
+.page_no {
+	border:            #6666FF solid 1px;
+	padding:           2px;
+}
+
+.this {
+	background-color:  #FFCCFF;
+	color:             #CC6600;
+	padding:           2px;
+}
+
+.move_page {
+	border-style:      none;
+}
+
+
+/* ::: Sort ::::::::::::::::::::::::::::::::::: */
+
+.sort {
+	font-weight:       bold;
+}
+
+
+/* ::: Table Setting :::::::::::::::::::::::::: */
+
+table.cart_list {
+	line-height:       14px;
+}
+
+table.cart_list th {
+	background-color:  #AAAAAA;
+	color:             #FFFFFF;
+	padding:           2px 2px;
+}
+
+table.cart_list td {
+	padding:           5px 2px 0px 2px;
+}
+
+table.ditail {
+	background-color:  #FFCC00;
+}
+
+table.ditail th {
+	background-color:  #FFFF99;
+	padding:           0px 5px;
+}
+
+table.ditail td {
+	background-color:  #FFFFFF;
+	padding:           0px 5px;
+}
+
+
+/* ::: Tracks ::::::::::::::::::::::::::::::::: */
+
+.track_color1 {
+	background-color:  #CCCCCC;
+}
+
+.track_color2 {
+	background-color:  #FFFFFF;
+}
+
+table.tracks {
+	font-size:         11px;
+}
+
+table.tracks td {
+	padding:           0px 5px;
+}
+
+
+/* ::: Word Setting ::::::::::::::::::::::::::: */
+
+span.avail {
+	font-size:         10px;
+}
+
+span.creator {
+	color:             #808080;
+}
+
+span.group {
+	font-weight:       bold;
+}
+
+span.list_title {
+	font-weight:       bold;
+}
+
+span.look_title {
+	font-size:         16px;
+	font-weight:       bold;
+}
+
+span.price {
+	color:             #F10000;
+	font-weight:       bold;
+}
+
+span.rank {
+	font-weight:       bold;
+}
+
+
+/* ::: ID ::::::::::::::::::::::::::::::::::::: */
+
+#attention {
+	background-color:  #FFFFFF;
+	line-height:       14px;
+}
+
+#contents {
+	background-color:  #FFFFFF;
+	line-height:       20px;
+	padding:           5px;
+}
+
+#container {
+/*
+	border-color:      #888888;
+	border-style:      solid;
+	border-width:      1px;
+*/
+}
+
+#explorer {
+	background:        #004A80;
+	line-height:       16px;
+	padding:           0px 5px 5px 5px;
+}
+
+#footer {
+	background-color:  #FFFFFF;
+	text-align:        center;
+}
+
+#header {
+	background-color:  #FFFFFF;
+	padding:           5px;
+}
+
+#index {
+}
+
+#search {
+	background-color:  #E6E6E6;
+	margin:            0px;
+	padding:           5px;
+/*	width:             930px;*/
+}
+
+#topseller {
+	background-color:  #FFFFFF;
+	border:            #FF66FF solid 1px;
+	font-size:         11px;
+	padding:           2px;
+}
+
+
+/* ::: Game Style ::::::::::::::::::::::::::::: */
+
+.col_ps2 {
+	background-color:  #6699FF;
+}
+
+.col_ds {
+	background-color:  #FFCC00;
+}
+
+table.gamelist {
+	margin:            0px 0px 20px 0px;
+	padding:           0px;
+}
+
+.gamelist_title {
+	background-color:  #CCFF99;
+	margin:            0px;
+	padding:           0px 5px;
+}
+
+.gamelist_img {
+	margin:            0px;
+	padding:           5px;
+}
+
+.gamelist_exp {
+	background-color:  #FFFFCC;
+	margin:            0px;
+	padding:           5px;
+}

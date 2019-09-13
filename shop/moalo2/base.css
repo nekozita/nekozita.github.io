@@ -1,0 +1,224 @@
+@charset "UTF-8";
+
+/* リセット
+--------------------------------------*/
+
+body,form,fieldset,
+h1,h2,h3,h4,h5,h6,address,
+ul,ol,li,dl,dt,dd {
+	margin:0;
+	padding:0;
+	font-size:1em;
+	font-weight:normal;
+}
+h1,h2,h3,h4,h5,h6 {font-weight:bold;}
+
+h1 {font-size:2em;}
+h2 {font-size:1.5em;color:#e6b422;}
+h3 {}
+h4 {}
+h5 {}
+h6 {}
+
+a{/*リンクされた文字*/
+	color:#0044ff;
+	font-style:normal;
+	text-decoration:underline;
+}
+a:link {/*未訪問のリンク*/
+	color:#0044ff;
+	font-style:normal;
+	text-decoration:underline;
+}
+a:visited {/*訪問後のリンク*/
+	color:#934C7B;
+	text-decoration:underline;
+}
+a:hover {/*マウスをのせたとき*/
+	color:#ff6600;
+	font-style:normal;
+	text-decoration:underline;
+}
+a:active {/*クリック中*/
+	text-decoration:none;
+}
+
+hr {
+	border-top: 1px dotted #bbbbbb;
+	margin:20px 0px;
+}
+
+dl dt {
+	clear: both;
+	float: left;
+	font-weight: bold;
+	padding-left: 1em;
+}
+dl dd {
+	margin: 0;
+	padding-left: 0;
+}
+
+/* 共通
+--------------------------------------*/
+
+body {
+	background:#ffffff;
+	color:#444444;
+	font-family:メイリオ,Verdana,"ＭＳ Ｐゴシック",Sans-serif;
+	font-size:14px;
+}
+
+.debug {
+	text-align:right;
+}
+
+.price {
+	color:#ff0000;
+	font-weight:bold;
+}
+
+.total-price {
+	color:#ff0000;
+	font-size:2em;
+	font-weight:bold;
+}
+
+.item-title {
+	font-weight:bold;
+}
+
+.item-info-sub {
+	color:#888888;
+	font-size:0.8em;
+}
+
+input.quantity {
+	text-align:center;
+}
+
+/*
+button.cartin {
+	background-color:#e6b422;
+}
+*/
+button {
+    /* 文字サイズを1.4emに指定 */
+    font-size: 1.2em;
+
+    /* 文字の太さをboldに指定 */
+    font-weight: bold;
+
+    /* 縦方向に10px、
+     * 横方向に30pxの余白を指定 */
+    padding: 10px 20px;
+
+    /* 背景色を濃い青色に指定 */
+    background-color: #e6b422;
+
+    /* 文字色を白色に指定 */
+    color: #fff;
+
+    /* ボーダーをなくす */
+    border-style: none;
+
+    /* ボタンの影の指定
+     * 影の横幅を2px
+     * 縦長を2px
+     * ぼかしを3px
+     * 広がりを1px
+     * 色を#666（グレー）に指定 */
+    box-shadow: 2px 2px 3px 1px #666;
+    -moz-box-shadow: 2px 2px 3px 1px #666;
+    -webkit-box-shadow: 2px 2px 3px 1px #666;
+}
+button:hover {
+    /* 背景色を明るい青色に指定 */
+    background-color: #ffc826;
+
+    /* 文字色を白色に指定 */
+    color: #fff;
+}
+
+button.cartin {
+    background-color:#e6b422;
+}
+button.cartin:hover {
+    background-color: #ffc826;
+}
+button.preorder {
+    background-color: #2ca9e1;
+}
+button.preorder:hover {
+    background-color: #32c0ff;
+}
+
+
+/* HEADER STYLE
+--------------------------------------*/
+
+.search-area {
+	background-color:#e6b422;
+	margin:5px 0px;
+	padding:5px;
+}
+
+.searchIndex-area {
+	float:left;
+	width:80%;
+}
+input.keyword {
+	font-size:1.2em;
+	width:60%;
+}
+
+.cart-area {
+	float:right;
+	text-align:right;
+}
+.cart-area input {
+	font-size:1.2em;
+}
+
+/* FOOTER STYLE
+--------------------------------------*/
+
+.footer-area {
+	margin:0px 0px 20px 0px;
+}
+.footer-area address {
+	color:#444444;
+	font-size:10px;
+	font-style:italic;
+	text-align:center;
+}
+
+.help-area {
+	margin:5px;
+}
+
+/* CONTENTS STYLE
+--------------------------------------*/
+
+.contents-area {
+	padding:5px;
+}
+
+.searchItem-area {
+	float:left;
+	width:400px;
+}
+
+.pageIndex-area {
+	text-align:center;
+}
+
+.lookup-area {
+}
+
+.searchWord-area {
+}
+
+.bestseller-area {
+	margin:20px 0px 0px 0px;
+}

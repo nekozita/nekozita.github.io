@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="ja" xml:lang="ja" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Language" content="ja" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<TMPL_UNLESS NAME="error"><meta http-equiv="Refresh" content="0; URL=%url%" /></TMPL_UNLESS>
+<title>%COPYRIGHT1%</title>
+<link href="%IMAGE_URL%/default.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+<div class="copyright">%COPYRIGHT2%</div>
+<TMPL_IF NAME="error">
+<h1>セキュリティー警告</h1>
+<p>該当のURLには、不適切な文字が含まれているため、リダイレクトを中止しました。</p>
+<p>%url_disp%</p>
+<TMPL_ELSE>
+<h1>リダイレクト中...</h1>
+<p>しばらくしても画面が切り替わらない場合は、下記URLをクリックしてください。</p>
+<p><a href="%url%">%url_disp%</a></p>
+</TMPL_IF>
+<hr />
+<div>%COPYRIGHT3%</div>
+</body>
+</html>

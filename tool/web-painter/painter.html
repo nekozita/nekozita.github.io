@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+	<meta charset="UTF-8">
+	<title>HTML5 Painter</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
+	<!-- <meta name="apple-mobile-web-app-capable" content="yes"> -->
+	<style>
+	body {
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		margin: 0;
+		background: #666;
+	}
+
+	body {font-size: 8pt;}
+
+	#canvasArea {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		margin: auto;
+		background: #fff no-repeat center center;
+		-webkit-background-size:contain;
+		background-size:contain;
+		cursor: crosshair;
+		box-shadow: 0 0 30px #000;
+	}
+	/*@media screen and (min-height:401px) {}*/
+	/*@media screen and (min-width:641px) {}*/
+
+	button {
+		background: #fff;
+		padding: 5px;
+	}
+	button:active {
+		background: #fcc;
+	}
+	button#button-zoom-in {
+		width: 25px;
+		line-height: 1em;
+	}
+	button#button-zoom-out {
+		width: 25px;
+		line-height: 1em;
+	}
+	a {
+		color: #fff;
+	}
+
+	#menubar {
+		position: fixed;
+		left: 0; right: 0; /* 横一杯に広げる */
+		top: 0;
+		background: #000;
+		color: #ccc;
+		padding: 5px;
+		opacity: 0.5;
+	}
+
+	#toolPane {
+		position: fixed;
+		left: 0;
+		top: 50px;
+		background: #000;
+		color: #ccc;
+		padding: 5px;
+		opacity: 0.5;
+	}
+	#toolArea {
+		float: left;
+		margin: 0 5px 0 0;
+	}
+	#toolArea ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	#toolArea input[type="radio"] {
+		display: none;
+	}
+	#toolArea label {
+		background: #444;
+		color: #fff;
+		/*border: solid 2px #000;*/
+		display: block;
+		padding: 5px;
+	}
+	#toolArea input[type="radio"]:checked + label {
+		background: #fcc;
+		color: #444;
+	}
+
+	#optionArea {
+		float: right;
+	}
+	#optionArea ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	#optionArea li {
+		border-bottom: solid 1px #fff;
+		padding: 5px 0;
+	}
+	#optionArea label {
+		background: transparent;
+		float: left;
+	}
+	#optionArea input[type="text"] {
+		float: right;
+	}
+	#optionArea input[type="range"] {
+		clear: both;
+		display: block;
+		width: 120px;
+	}
+
+	#colorPickerPane {
+		position: fixed;
+		right: 0;
+		top: 50px;
+		width: 200px;
+		background: #000;
+		color: #ccc;
+		padding: 5px;
+		opacity: 0.5;
+	}
+	p.tabmenu a {
+		display: block;
+		float: left;
+		width: 30px;
+		margin: 0 3px 0 0;
+		padding: 5px;
+		text-decoration: none;
+		text-align: center;
+		background-color: #fff;
+		color: #444;
+		font-weight: 600;
+	}
+	div.tab {
+		clear: left;
+		overflow-y: scroll;
+		height: 100px;
+		border-top: solid 1px #fff;
+		padding: 10px 0;
+	}
+
+	#layerPane {
+		position: fixed;
+		right: 0;
+		top: 250px;
+		width: 150px;
+		background: #000;
+		color: #ccc;
+		padding: 5px;
+		opacity: 0.5;
+	}
+	#layerPane ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	#layerPane li {
+		background-color: #fff;
+		border: solid 1px #000;
+		color: #444;
+		padding: 5px;
+	}
+	#layerList input[type="radio"] {
+		display: none;
+	}
+	#layerList label {
+		/*background: #444;*/
+		/*color: #fff;*/
+		/*border: solid 2px #000;*/
+		/*display: block;*/
+		/*padding: 5px;*/
+	}
+	#layerList input[type="radio"]:checked + label {
+		background: #fcc;
+		color: #444;
+	}
+	</style>
+	<script src="sys.js"></script>
+	<script src="color.js"></script>
+	<script src="main.js"></script>
+</head>
+<body>
+	<!-- Canvas -->
+	<div id="canvasArea"></div>
+
+	<!-- Menubar -->
+	<div id="menubar">
+		HTML5 Painter
+		|
+		<!-- <button onClick="">開く</button> -->
+		<!-- <button onClick="">名前を付けて保存</button> -->
+		<!-- | -->
+		<!-- <button onClick="">新規作成</button> -->
+		|
+		<span id="status"></span>
+	</div>
+
+	<!-- Tool -->
+	<div id="toolPane">
+		<div id="toolArea">
+			<ul>
+				<li id="undoButton"><button onClick="undo()">戻す</button></li>
+				<li id="redoButton"><button onClick="redo()">やり直し</button></li>
+				<li>
+					<input type="radio" name="tool" id="tool-1" checked="checked">
+					<label for="tool-1" id="brushButton" onClick="setTool('brush')">ブラシ</label>
+				</li>
+				<li>
+					<input type="radio" name="tool" id="tool-2">
+					<label for="tool-2" id="eraserButton" onClick="setTool('eraser')">消しゴム</label>
+				</li>
+				<!-- <li><input type="text"><label for="">エアブラシ</label></li> -->
+				<!-- <li><input type="text"><label for="">バケツ</label></li> -->
+				<!-- <li><input type="text"><label for="">スポイト</label></li> -->
+				<!-- <li><input type="text"><label for="">移動</label></li> -->
+				<li><hr></li>
+				<li id="">
+					<button id="button-zoom-in">＋</button>
+					<button id="button-zoom-out">−</button>
+				</li>
+				<li><input type="text" name="zoom" onChange="changeZoom()" size=4>%</li>
+			</ul>
+		</div>
+		<!-- Tool Option -->
+		<div id="optionArea">
+			<ul>
+				<li>
+					<label for="">ブラシサイズ</label>
+					<input type="text" id="text-brush-size" size="4">
+					<input type="range" id="slider-brush-size" min="1" max="500">
+				</li>
+				<li>
+					<label for="">硬さ</label>
+					<input type="text" id="text-blur-size" size="4">
+					<input type="range" id="slider-blur-size" max="100">
+				</li>
+
+<!-- 				<li>
+					<label for=""></label><input type="text">
+				</li>
+ -->
+			</ul>
+		</div>
+
+<!-- 		<button>登録</button>
+		<button>削除</button>
+ -->
+	</div>
+
+	<!-- Color Picker -->
+	<div id="colorPickerPane">
+		<div class="tabbox">
+			<p class="tabmenu">
+				<a href="#tab1" class="tab1" onClick="changeTab('tab1')">RGB</a>
+				<a href="#tab2" class="tab2" onClick="changeTab('tab2')">HSB</a>
+				<a href="#tab3" class="tab3" onClick="changeTab('tab3')">-</a>
+			</p>
+			<div id="tab1" class="tab">
+				R:<input type="range" id="slider-rgb[0]" name="slider-rgb">
+				<input type="text" id="text-rgb[0]" name="text-rgb" size="4"><br>
+				G:<input type="range" id="slider-rgb[1]" name="slider-rgb">
+				<input type="text" id="text-rgb[1]" name="text-rgb" size="4"><br>
+				B:<input type="range" id="slider-rgb[2]" name="slider-rgb">
+				<input type="text" id="text-rgb[2]" name="text-rgb" size="4"><br>
+			</div>
+			<div id="tab2" class="tab">
+				H:<input type="range" id="slider-hsb[0]" name="slider-hsb">
+				<input type="text" id="text-hsb[0]" name="text-hsb" size="4"><br>
+				S:<input type="range" id="slider-hsb[1]" name="slider-hsb">
+				<input type="text" id="text-hsb[1]" name="text-hsb" size="4"><br>
+				B:<input type="range" id="slider-hsb[2]" name="slider-hsb">
+				<input type="text" id="text-hsb[2]" name="text-hsb" size="4"><br>
+			</div>
+			<div id="tab3" class="tab"></div>
+			<script>changeTab('tab1');</script>
+		</div>
+	</div>
+
+	<!-- Layer -->
+	<div id="layerPane">
+		<select name="" id="">
+			<option value="normal">通常</option>
+			<option value="multiply">乗算</option>
+			<option value="add">加算</option>
+		</select><br>
+		<hr>
+		<button id="button-add-layer">追加</button>
+		<button id="button-del-layer">削除</button>
+		<!-- 不透明度：<input type="range"><input type="text" size="4" value="100">%<br> -->
+		<ul id="layerList">
+			<li>
+				<input type="checkbox">
+				<input type="radio" name="layer" id="layer-2">
+				<label for="layer-2">Layer2</label>
+			</li>
+			<li>
+				<input type="checkbox">
+				<input type="radio" name="layer" id="layer-1">
+				<label for="layer-1">Layer1</label>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

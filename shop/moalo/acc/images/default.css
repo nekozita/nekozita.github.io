@@ -1,0 +1,103 @@
+body {
+	font-size: 12px;
+	font-family: メイリオ, "ＭＳ Ｐゴシック", Osaka;
+	font-family: Helvetica, Arial, sans-serif;
+	color: #4c4c4c;
+}
+a:hover {
+	color: red;
+	text-decoration:underline;
+}
+a {
+	text-decoration:none;
+	font-family: メイリオ, "ＭＳ Ｐゴシック", Osaka;
+}
+h1 {
+	font-size: 16px;
+	font-family: メイリオ, "ＭＳ Ｐゴシック", Osaka;
+	color: #196a77;
+	padding: 5px;
+	margin-top: 2px;
+	border-top: 2px solid #4c4c4c;
+	border-bottom: 1px solid #4c4c4c;
+	background-color: #eeeeee;
+	font-weight: normal;
+}
+h1 a:hover {
+	text-decoration:none;
+	color: #196a77;
+}
+h1 a {
+	display: block;
+	text-decoration:none;
+	color: #196a77;
+}
+h2 {
+	font-size: 14px;
+	font-family: メイリオ, "ＭＳ Ｐゴシック", Osaka;
+	color: #196a77;
+	font-weight: normal;
+	margin-top: 15px;
+	margin-bottom: 10px;
+	border-left: 7px solid #196a77;
+	border-top: 2px solid #196a77;
+	padding-top: 2px;
+	padding-left: 4px;
+}
+h3 {
+	font-size: 12px;
+	font-family: メイリオ, "ＭＳ Ｐゴシック", Osaka;
+	color: #196a77;
+	font-weight: normal;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+img{
+	vertical-align: middle;
+	border: 0px;
+}
+form {
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+select {
+	font-size: 12px;
+	font-family: メイリオ, "ＭＳ Ｐゴシック", Osaka;
+}
+input {
+	font-size: 12px;
+	font-family: メイリオ, "ＭＳ Ｐゴシック", Osaka;
+}
+textarea {
+	font-size: 12px;
+	font-family: メイリオ, "ＭＳ Ｐゴシック", Osaka;
+}
+th {
+	font-size: 12px;
+	font-family: メイリオ, "ＭＳ Ｐゴシック", Osaka;
+}
+td {
+	font-size: 12px;
+	font-family: メイリオ, "ＭＳ Ｐゴシック", Osaka;
+}
+.copyright {
+	text-align: right;
+}
+.err {
+	color: #bb0000;
+}
+.errbox {
+	color: #bb0000;
+	padding: 1em;
+	margin: 1em;
+}
+.right {
+	text-align: right;
+}
+
+img.gbar1 {
+	border-right: 1px solid #cb5633;
+}
+img.gbar2 {
+	border-right: 1px solid #3688d3;
+}

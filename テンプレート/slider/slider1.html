@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+	<meta charset="UTF-8">
+	<title>スライダー</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
+	<style>
+	body{margin: 0 0 100px 0;}
+
+	.slider-wrap{
+		position: relative;
+		width: 100%;
+	}
+	.slider{
+		overflow: hidden;
+		width: 100%;
+	}
+	.slider>div,.slider>ul{
+		position: relative;
+	}
+	.slider>ul{
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.slider>div>div,.slider li{
+		float: left;
+		/*height: 200px;*/ /* 本番では削除 */
+	}
+	.slider a{
+		position: relative;
+		display: block;
+		width: 100%;
+		/*height: 100%;*/
+		margin: 0;
+		padding: 0;
+		color: #e00;
+		text-decoration: none;
+		box-sizing: border-box;
+		/*border: 1px solid #e00;*/ /* デバッグ用 */
+	}
+	.slider li a{
+		float: left;
+		width: 48%;
+	}
+	.list-slider li a{
+		margin: 0 0 0 2%;
+		overflow: hidden;
+		border-radius: 5px;
+	}
+	.slider img{
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+	.slider a span{
+		position: absolute;
+		display: block;
+		bottom: 0;
+		width: 100%;
+		box-sizing: border-box;
+		padding: 0 5px;
+		background: rgba(0,0,0,.5);
+		color: #fff;
+		text-align: center;
+	}
+	.slider-prev,.slider-next{
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		margin: auto 0;
+		width: 40px;
+		height: 40px;
+		background: url(slider-arrow.png);
+		background-repeat: no-repeat;
+		-webkit-filter: drop-shadow(0 0 2px rgb(0,0,0));
+		filter: drop-shadow(0 0 2px rgb(0,0,0));
+		opacity: .6;
+	}
+	.slider-prev{
+		left: 5px;
+	}
+	.slider-next{
+		right: 5px;
+		background-position: -40px 0;
+	}
+	.slider-prev:hover{
+		background-position: 0 -40px;
+		opacity: .8;
+	}
+	.slider-next:hover{
+		background-position: -40px -40px;
+		opacity: .8;
+	}
+
+	.pan a{
+		overflow: hidden;
+	}
+	.pan a img{
+		-webkit-transition: -webkit-transform .5s ease;
+		transition: transform .5s ease;
+	}
+	.pan a img:hover{
+		cursor: pointer;
+		/*マウスオーバーで画像を拡大表示*/
+		-webkit-transform: scale(1.2);
+		transform: scale(1.2);
+	}
+	</style>
+	<script src="easing.js"></script>
+	<script src="slider.js"></script>
+</head>
+<body>
+	<h1>Div Slider</h1>
+	<div class="slider-wrap">
+		<div class="slider pan">
+			<div>
+				<div><a href="#">
+					<img src="image/04_1366x768.jpg" alt="">
+					<span>slide1</span>
+				</a></div>
+				<div><a href="#">
+					<img src="image/2015xmas_1366x768.jpg" alt="">
+					<span>slide2</span>
+				</a></div>
+				<div><a href="#">
+					<img src="image/141224_1366x768.jpg" alt="">
+					<span>slide3</span>
+				</a></div>
+				<div><a href="#">
+					<img src="image/150807_1366x768.jpg" alt="">
+					<span>slide4</span>
+				</a></div>
+			</div>
+		</div>
+		<div class="slider-prev"></div>
+		<div class="slider-next"></div>
+	</div>
+
+	<h1>List Slider</h1>
+	<div class="slider-wrap">
+		<div class="slider list-slider pan">
+			<ul>
+				<li>
+					<a href="#">
+						<img src="image/04_1366x768.jpg" alt="">
+						<span>slide1-1</span>
+					</a>
+					<a href="#">
+						<img src="image/2015xmas_1366x768.jpg" alt="">
+						<span>slide1-2</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<img src="image/141224_1366x768.jpg" alt=""><span>slide2-1</span>
+					</a>
+					<a href="#">
+						<img src="image/150807_1366x768.jpg" alt=""><span>slide2-2</span>
+					</a>
+				</li>
+				<li>
+					<a href="#">
+						<img src="image/151001_1366x768.jpg" alt=""><span>slide3-1</span>
+					</a>
+					<a href="#">
+						<img src="image/newyear2016_1366x768.jpg" alt=""><span>slide3-2</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="slider-prev"></div>
+		<div class="slider-next"></div>
+	</div>
+
+	<script>
+		onload=function(){
+			Slider('.slider');
+		};
+
+	</script>
+</body>
+</html>

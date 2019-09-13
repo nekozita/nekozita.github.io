@@ -1,0 +1,171 @@
+@charset "UTF-8";
+/*
+	フォーム部品のカスタマイズ
+*/
+input,button,textarea{
+	-webkit-appearance: none;
+	appearance: none;
+
+}
+input[type="text"],
+input[type="email"],
+textarea{
+	outline: none;
+	padding: 4px 8px;
+	border: 1px solid #aaa;
+	border-radius: 5px;
+	-webkit-transition: all .3s;
+	transition: all .3s;
+}
+input[type="text"]:focus,
+input[type="email"]:focus,
+textarea:focus{
+	box-shadow: 0 0 7px #1fa;
+	border: 1px solid #1fa;
+}
+input[type="text"],
+input[type="email"],
+textarea,label{
+	box-sizing: border-box;
+	width: 100%;
+}
+input[type="submit"],
+input[type="reset"],
+button{
+	outline: none;
+	/*width: 8em;*/
+	/*height: 40px;*/
+	/*line-height: 40px;*/
+	padding: .5em 2em;
+	background: #fff;
+	font-size: 12pt;
+	border: 1px solid #aaa;
+	border-radius: 2px;
+	-webkit-transition: all .3s;
+	transition: all .3s;
+}
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+button:hover{
+	background: #0a0;
+	color: #fff;
+}
+input[type="submit"]:active,
+input[type="reset"]:active,
+button:active{
+	background: #0a0;
+	color: #fff;
+}
+
+/*
+	ニュースティッカー
+*/
+.ticker{
+	position: relative;
+	overflow: hidden;
+	/*width: 600px;*/
+	margin: 5px;
+	padding: 0 1em;
+	text-align: left;
+	border: 1px solid #ccc;
+}
+.ticker ul {
+	position: relative;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+	.ticker ul li {
+	width: 100%;
+	display: none;
+}
+.ticker a{
+	text-decoration: none;
+}
+@-webkit-keyframes ticker-fadein{
+	from{opacity: 0;}to{opacity: 1;}
+}
+@keyframes ticker-fadein{
+	from{opacity: 0;}to{opacity: 1;}
+}
+@-webkit-keyframes ticker-fadeout{
+	from{opacity: 1;}to{opacity: 0;}
+}
+@keyframes ticker-fadeout{
+	from{opacity: 1;}to{opacity: 0;}
+}
+@-webkit-keyframes ticker-rollin{
+	from{top: 3em; opacity: 0;}to{top: 0; opacity: 1;}
+}
+@keyframes ticker-rollin{
+	from{top: 3em; opacity: 0;}to{top: 0; opacity: 1;}
+}
+@-webkit-keyframes ticker-rollout{
+	from{top: 0; opacity: 1;}to{top: -3em; opacity: 0;}
+}
+@keyframes ticker-rollout{
+	from{top: 0; opacity: 1;}to{top: -3em; opacity: 0;}
+}
+@-webkit-keyframes ticker-slidein{
+	from{left: 100%; opacity: 0;}to{left: 0; opacity: 1;}
+}
+@keyframes ticker-slidein{
+	from{left: 100%; opacity: 0;}to{left: 0; opacity: 1;}
+}
+@-webkit-keyframes ticker-slideout{
+	from{left: 0; opacity: 1;}to{left: -100%; opacity: 0;}
+}
+@keyframes ticker-slideout{
+	from{left: 0; opacity: 1;}to{left: -100%; opacity: 0;}
+}
+
+/*
+	電光掲示板
+*/
+.marquee{
+	overflow: hidden;
+	position: relative;
+	color: #FFF959;
+	font-size: 20pt;
+	font-weight: bold;
+	background: #333;
+}
+.marquee:after{
+	content: '';
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	/*background: -webkit-linear-gradient(#17033B 1px, transparent 0px),-webkit-linear-gradient(0, #17033B 1px, transparent 1px);*/
+	/*background: linear-gradient(#17033B 1px, transparent 0px),linear-gradient(0, #17033B 1px, transparent 1px);*/
+	/*background-size: 2px 2px;*/
+	z-index: 10;
+}
+.marquee div{
+	display: inline-block;
+	padding-left: 100%;
+	white-space: nowrap;
+	-webkit-animation: marquee 15s infinite linear;
+	animation: marquee 15s infinite linear;
+}
+/* マウスオーバーでスクロール停止 */
+/*.marquee:hover div{ animation-play-state: paused; }*/
+.marquee span{
+	margin-right: 8em;
+}
+@-webkit-keyframes marquee{
+	from{
+		-webkit-transform: translate(0%);
+	}to{
+		-webkit-transform: translate(-100%);
+	}
+}
+@keyframes marquee{
+	from{
+		transform: translate(0%);
+	}to{
+		transform: translate(-100%);
+	}
+}

@@ -1,0 +1,6 @@
+DirectoryIndex index.html index.cgi index.php .ht
+AuthUserFile /home/nekozita/www/.htpasswd
+AuthType Basic
+AuthName "Web access"
+Satisfy all
+Order deny,allow
